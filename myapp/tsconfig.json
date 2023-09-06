@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts", "pages/404.tsx", "pages/_app.tsx", "pages/about.tsx", "pages/account.tsx", "pages/cart.tsx", "pages/contact.tsx", "pages/details.tsx", "pages/dropdown.tsx", "pages/index.tsx", "pages/logIn.tsx", "pages/signup.tsx", "pages/wishlist.tsx", "components/Account.tsx", "components/Button.tsx", "components/Cart1.tsx", "components/Cart1WithBuy.tsx", "components/Component_2.tsx", "public/DropDown.tsx", "components/Footer.tsx", "components/Header.tsx", "components/HeaderComponent.tsx", "components/PlaceboxInfo.tsx", "components/PlaceToInfoBox.tsx", "components/Roadmap.tsx", "components/SearchComponentSet.tsx", "components/TopHeader.tsx", "components/UnderLine.tsx", "components/User.tsx", "public/Wishlist.tsx", "public/AppStore.tsx", "public/GooglePlay.tsx", "public/IconCopyright.tsx", "public/IconFacebook.tsx", "public/IconInstagram.tsx", "public/IconLinkedin.tsx", "public/IconSend.tsx", "public/IconTwitter.tsx", "public/Line_3.tsx", "public/Logo.tsx", "public/QrCode.tsx", "public/SendMail.tsx",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
