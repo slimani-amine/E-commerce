@@ -4,7 +4,7 @@ const route = express.Router();
 const { sequelize, DataTypes } = require('../models'); 
 const md = require ("../models"); 
 const user = require("../models/user");
-const jwt = require("jsonwebtoken")
+const jwt =require("jsonwebtoken")
 
 
 const User = md.User; 
@@ -41,19 +41,19 @@ route.post("/register" , async (req, res) => {
 
     const hashPassword = await bcrypt.hash(req.body.password, 10);
     
-    // let roleData = {}; 
+    
 
     const newUser = await User.create({
       userName: req.body.userName,
       email: req.body.email,
       password: hashPassword,
     });
-    
-    // roleData[newUser.role] = newUser; 
+    console.log(newUser);
+   
 
-    res.status(201).json(roleData);
+    res.status(201).json(newUser);
   } catch (err) {
-    console.error(err);
+    console.log(err);
     res.status(500).json({ message: "Failed to create User" });
   }
 })
@@ -117,7 +117,7 @@ route.put("/updateUser/:id", verifyToken ,  (req, res) => {
     });
 });
 
-route.delete("/deleteUser/:id", verifyToken , (req, res) => {
+route.delete("/deleteUser/:id", (req, res) => {
   User.destroy({ where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json(result);
