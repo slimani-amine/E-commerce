@@ -12,7 +12,7 @@ import { IconLinkedin } from "../public/IconLinkedin";
 export const Footer = ({ override }: { override?: React.CSSProperties }) => {
   return (
     <div
-      className="overflow-hidden relative w-[1440px] h-[440px] bg-black"
+      className="overflow-hidden relative w-screen h-[440px] bg-black"
       style={override}
     >
       <div className="flex flex-col items-center gap-4 opacity-40 absolute left-0 top-[376px]">
