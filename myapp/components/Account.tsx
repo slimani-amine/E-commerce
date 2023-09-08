@@ -1,7 +1,6 @@
 import { TopHeader } from "./TopHeader";
 import { HeaderComponent } from "./HeaderComponent";
 import { Line_3 } from "../public/Line_3";
-import { PlaceboxInfo } from "./PlaceboxInfo";
 import { Footer } from "./Footer";
 import Link from "next/link";
 import line_16 from "../public/line_16.svg";
@@ -263,7 +262,7 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
         </div>
 
         <div className="flex items-center gap-8  absolute right-20 top-[550px]">
-          <p className="text-red">{msg}</p>
+          <p className="text-[rgb(219,_68,_68)] text-xl font-medium">{msg}</p>
 
           <p
             onClick={() => {
@@ -274,6 +273,7 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
               setOldpass("");
               setNewpass("");
               setCnewpass("");
+              setmsg("")
             }}
             className="text-black text-base font-normal "
           >
@@ -285,7 +285,7 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
               if (verif() === true) {
                 save(e);
               } else {
-                setmsg("something wrong ! please try later");
+                setmsg("something wrong ! please try again");
               }
             }}
             className="flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium leading-6 "

@@ -22,7 +22,7 @@ export const Header = ({
           <Link href="/contact"className="absolute left-[0%] right-[0%] w-full top-[0%] bottom-[0%] h-full text-black text-base font-normal leading-6">
             Contact
           </Link>
-        </div>
+        </div> 
       );
     case "About":
       return (

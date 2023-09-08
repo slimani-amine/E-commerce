@@ -59,21 +59,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           left: "0px",
         }}
       />
-      <div className="flex items-center gap-3" style={override}>
-        <Link
-          href="/"
-          className="opacity-50 text-black text-sm font-normal leading-[21px]"
-        >
-          Home
-        </Link>
-        <img className="[rotate:117.1deg] w-[13px] h-0" src={line_16.src} />
-        <Link
-          href="/contact"
-          className="text-black text-sm font-normal leading-[21px]"
-        >
-          Contact
-        </Link>
-      </div>
+
       <div
         className="flex items-center gap-3"
         style={{
@@ -86,7 +72,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           href="/"
           className="opacity-50 text-black text-sm font-normal leading-[21px]"
         >
-          Account
+          home
         </Link>
         <img className="[rotate:117.1deg] w-[13px] h-0" src={line_16.src} />
         <Link
