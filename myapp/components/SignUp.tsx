@@ -57,7 +57,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "0px",
-          left: "0px",
+          left: "25px",
         }}
       />
       <HeaderComponent
@@ -81,6 +81,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
           left: "135px",
         }}
       />
+
 <div>
 <div className="bg-white flex flex-row justify-center w-full">
       <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
@@ -173,7 +174,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "1093px",
-          left: "0px",
+          left: "25px",
         }}
       />
     </div>
