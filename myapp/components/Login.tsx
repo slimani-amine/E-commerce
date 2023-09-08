@@ -14,7 +14,7 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "0px",
-          left: "0px",
+          left: "25px",
         }}
       />
       <HeaderComponent
@@ -45,7 +45,7 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "1093px",
-          left: "0px",
+          left: "25px",
         }}
       />
     </div>

@@ -14,7 +14,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "0px",
-          left: "0px",
+          left: "25px",
         }}
       />
       <HeaderComponent
@@ -38,14 +38,12 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
           left: "135px",
         }}
       />
-<div>
-            SignUp
-        </div>
+      <div>SignUp</div>
       <Footer
         override={{
           position: "absolute",
           top: "1093px",
-          left: "0px",
+          left: "25px",
         }}
       />
     </div>
