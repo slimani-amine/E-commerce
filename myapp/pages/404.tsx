@@ -1,8 +1,8 @@
-import Head from "next/head";
 import React from "react";
+import {Error} from "../components/Error"
 
 const er404: React.FC = () => (
-  <div>hello</div>
+  <Error override={{ resize: "both", overflow: "hidden" }} />
 );
 
 export default er404;

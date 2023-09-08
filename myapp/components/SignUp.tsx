@@ -84,6 +84,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
 <div>
 <div className="bg-white flex flex-row justify-center w-full">
       <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
+        
         <Line className="!absolute !left-0 !top-[140px]" />
         <div className="inline-flex items-center gap-[129px] absolute top-[200px] left-0">
           <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
