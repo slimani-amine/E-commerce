@@ -14,7 +14,7 @@ export const Cart = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "0px",
-          left: "25px",
+          left: "0px",
         }}
       />
       <HeaderComponent
@@ -45,7 +45,7 @@ export const Cart = ({ override }: { override?: React.CSSProperties }) => {
         override={{
           position: "absolute",
           top: "1093px",
-          left: "25px",
+          left: "0px",
         }}
       />
     </div>

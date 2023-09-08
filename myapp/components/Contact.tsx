@@ -3,8 +3,6 @@ import { HeaderComponent } from "./HeaderComponent";
 import { Line_3 } from "../public/Line_3";
 import { Footer } from "./Footer";
 import { UnderLine } from "./UnderLine";
-import { CellphoneHover } from "../public/CellphoneHover";
-import { MailHover } from "../public/MailHover";
 import Link from "next/link";
 import line_16 from "../public/line_16.svg";
 import axios from "axios";

@@ -20,21 +20,38 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  console.log(email,"email");
+  console.log(password,"pass");
+  
+  
+
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/user/login", { email, password })
+    fetch("http://localhost:5000/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
       .then((res) => {
-        const token = res.data.token;
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Invalid email or password");
+        }
+      })
+      .then((data) => {
+        const token = data.token;
         localStorage.setItem("token", token);
         console.log("token", token);
         console.log("hello signup");
         router.push("/");
       })
       .catch((err) => {
-        console.log(err);
-        setError("Invalid email or password");
+        console.log(err, "the error");
+        setError(err.message || "Invalid email or password");
       });
   };
 
@@ -85,12 +102,8 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
             <div className="inline-flex flex-col items-start gap-[40px] relative flex-[0_0_auto]">
               <div className="inline-flex flex-col items-start gap-[48px] relative flex-[0_0_auto]">
                 <div className="gap-[24px] inline-flex flex-col items-start relative flex-[0_0_auto]">
-                  <div className="text-black text-4xl font-medium leading-[30px] tracking-wider">
-                    Log in to Exclusive
-                  </div>
-                  <div className="text-black text-base font-normal leading-normal">
-                    Enter your details below
-                  </div>
+                  <p className="text-black text-4xl font-medium leading-[30px] tracking-wider">Log in to Exclusive</p>
+                  <p className="text-black text-base font-normal leading-normal">Enter your details below</p>
                 </div>
                 <div className="inline-flex flex-col items-start gap-[40px] relative flex-[0_0_auto]">
                   <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
@@ -119,18 +132,13 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                 </div>
               </div>
               <div className="inline-flex items-center gap-[87px] relative flex-[0_0_auto]">
-                <div
-                  className="w-[143px] h-14 px-12 py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"
-                  onClick={(e) => handleSignIn(e)}
-                >
-                  <div className="text-neutral-50 text-base font-medium leading-normal">
-                    Log In
-                  </div>
-                </div>
 
-                <div className="text-red-500 text-base font-normal leading-normal cursor-pointer">
-                  Forget Password?
-                </div>
+
+                <button className="w-[143px] h-14 px-12 py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer" onClick={(e) => handleSignIn(e)}>
+                  <p className="text-neutral-50 text-base font-medium leading-normal">Log In</p>
+                </button>
+
+                <p className="text-red-500 text-base font-normal leading-normal cursor-pointer">Forget Password?</p>
               </div>
             </div>
           </div>
