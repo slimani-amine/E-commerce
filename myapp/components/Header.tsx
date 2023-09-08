@@ -22,7 +22,7 @@ export const Header = ({
           <Link href="/contact"className="absolute left-[0%] right-[0%] w-full top-[0%] bottom-[0%] h-full text-black text-base font-normal leading-6">
             Contact
           </Link>
-        </div>
+        </div> 
       );
     case "About":
       return (
@@ -35,7 +35,7 @@ export const Header = ({
     case "Sign Up":
       return (
         <div className="relative w-[61px] h-6" style={override}>
-          <Link href="/signup" className="absolute left-[0%] right-[0%] w-full top-[0%] bottom-[0%] h-full text-black text-base font-normal leading-6">
+          <Link href="/signup"className="absolute left-[0%] right-[0%] w-full top-[0%] bottom-[0%] h-full text-black text-base font-normal leading-6">
             Sign Up
           </Link>
         </div>

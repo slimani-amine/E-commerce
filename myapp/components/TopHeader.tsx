@@ -3,7 +3,7 @@ import { DropDown } from "../public/DropDown";
 export const TopHeader = ({ override }: { override?: React.CSSProperties }) => {
   return (
     <div
-      className="overflow-hidden relative w-[1440px] h-12 bg-black"
+      className="overflow-hidden relative w-screen h-12 bg-black"
       style={override}
     >
       <div className="flex items-start gap-[231px] absolute right-[136px] top-3">
