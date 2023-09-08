@@ -20,7 +20,8 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
 
 
   const [newUser, setNewUser] = useState({
-    userName : '',
+    firstName : '',
+    lasstName : '',
     password : '',
     email : '',
   })
@@ -108,7 +109,13 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
  
 
                 <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="Name" name='userName' value={newUser.userName} onChange={handleChange}></input>
+                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="firstName" name='firstName'value={newUser.firstName}  onChange={handleChange}></input>
+                    <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
+                      <div className="w-[370px] h-[0px] border border-black"></div>
+                    </div>
+                  </div>
+                  <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
+                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="lastName" name='lasstName'value={newUser.lasstName}  onChange={handleChange}></input>
                     <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                       <div className="w-[370px] h-[0px] border border-black"></div>
                     </div>
