@@ -5,56 +5,51 @@ import { HeaderComponent } from "./HeaderComponent";
 import { Line_3 } from "../public/Line_3";
 import { Roadmap } from "./Roadmap";
 import { Footer } from "./Footer";
-import { Button } from "../public/button";
 import { Line } from "../public/line";
-import { UnderLine } from "../public/underLine";
-import { PlaceboxInfo } from "./PlaceboxInfo";
 import { useRouter } from "next/router";
-
+import Stal from './Stal';
 import axios from "axios";
 
 export const Login = ({ override }: { override?: React.CSSProperties }) => {
   const router = useRouter();
-
-
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-
+  const [firstName,setFirstName]= useState <string>("");
+  const [id,setId]= useState <string>("");
   console.log(email,"email");
   console.log(password,"pass");
-  
-  
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+  
+    try {
+      const response = await axios.post('http://localhost:5000/user/login', {
+        email,
+        password,
+      })
+  
+      if (response.status === 200) {
+        const  token  = response.data.token;
+        const firstName=response.data.firstName;
+        const id =response.data.id;
+        localStorage.setItem('token', token); 
+        // <Stal firstName={firstName} id={id}>
 
-    fetch("http://localhost:5000/user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Invalid email or password");
-        }
-      })
-      .then((data) => {
-        const token = data.token;
-        localStorage.setItem("token", token);
-        console.log("token", token);
-        console.log("hello signup");
-        router.push("/");
-      })
-      .catch((err) => {
-        console.log(err, "the error");
-        setError(err.message || "Invalid email or password");
-      });
+        console.log('token', token);
+        console.log('firstName', setFirstName(firstName));
+        console.log('id', setId(id));
+        router.push('/');
+      } else {
+        throw new Error('Invalid email or password');
+      }
+    } catch (err) {
+      console.error(err, 'the error');
+      setError(err.message || 'Invalid email or password');
+    }
   };
+
+  
 
   return (
     <div
