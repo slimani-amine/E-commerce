@@ -76,7 +76,7 @@ console.log(comparing,"comparing");
       if (comparing) {
         const token = jwt.sign({ id: exist.id, firstName: exist.firstName, lasstName: exist.lasstName }, privateKey);
 
-        return res.status(200).json({token}); 
+        return res.status(200).json({id: exist.id, firstName: exist.firstName, token}); 
       } else {
     
         return res.status(401).json({ error: "Authentication failed" });
@@ -100,6 +100,8 @@ route.get("/getUser/:id",  (req, res) => {
       res.status(500).json(err);
     });
 });
+
+
 
 route.get("/getAllUsers", async (req, res) => {
   try {
