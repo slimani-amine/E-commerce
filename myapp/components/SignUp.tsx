@@ -118,43 +118,17 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
 
 
                 <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="Email or Phone Number" name='email' value={newUser.email} onChange={handleChange}></input>
+                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="Email " name='email' value={newUser.email} onChange={handleChange}></input>
                     <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                       <div className="w-[370px] h-[0px] border border-black"></div>
                     </div>
                   </div>
 
-                  <div className="relative w-fit [font-family:var(--title-16px-regular-font-family)] font-[number:var(--title-16px-regular-font-weight)] text-[color:var(--text-2)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap ">
-                    Enter your details below
-                  </div>
+
                 </div>
                 <div className="inline-flex flex-col items-center gap-[40px] relative flex-[0_0_auto]">
                   <div className="inline-flex flex-col items-start gap-[40px] relative flex-[0_0_auto]">
-                    <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                      <input
-                        className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
-                        placeholder="Name"
-                        name="userName"
-                        value={newUser.userName}
-                        onChange={handleChange}
-                      ></input>
-                      <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
-                        <div className="w-[370px] h-[0px] border border-black"></div>
-                      </div>
-                    </div>
 
-                    <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                      <input
-                        className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
-                        placeholder="Email or Phone Number"
-                        name="email"
-                        value={newUser.email}
-                        onChange={handleChange}
-                      ></input>
-                      <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
-                        <div className="w-[370px] h-[0px] border border-black"></div>
-                      </div>
-                    </div>
 
                     <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
                       <input

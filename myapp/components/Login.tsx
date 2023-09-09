@@ -7,7 +7,7 @@ import { Roadmap } from "./Roadmap";
 import { Footer } from "./Footer";
 import { Line } from "../public/line";
 import { useRouter } from "next/router";
-import Stal from './Stal';
+
 import axios from "axios";
 
 export const Login = ({ override }: { override?: React.CSSProperties }) => {
