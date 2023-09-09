@@ -1,4 +1,3 @@
-import { PlaceToInfoBox } from "./PlaceToInfoBox";
 export const PlaceboxInfo = ({
   override,placeHolder,tyPe
 }: {
@@ -21,7 +20,6 @@ export const PlaceboxInfo = ({
         placeHolder={placeHolder}
         tyPe={tyPe}
       />
-
     </div>
   );
 };

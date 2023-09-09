@@ -145,7 +145,6 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
         <div className="inline-flex flex-col items-start gap-[32px] relative top-[40px] left-[35px]">
           <div className="inline-flex flex-col items-start gap-[24px] relative flex-[0_0_auto]">
             <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
-              <CellphoneHover className="!relative !w-[40px] !h-[40px]" />
               <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-black text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
                 Call To Us
               </div>
@@ -162,7 +161,6 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           <UnderLine />
           <div className="inline-flex flex-col items-start gap-[24px] relative flex-[0_0_auto]">
             <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
-              <MailHover className="!relative !w-[40px] !h-[40px]" />
               <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-black text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
                 Write To US
               </div>
