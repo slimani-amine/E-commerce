@@ -38,9 +38,6 @@ export const Home = ({ override }: { override?: React.CSSProperties }) => {
           left: "135px",
         }}
       />
-<div>
-            Home
-        </div>
       <Footer
         override={{
           position: "absolute",

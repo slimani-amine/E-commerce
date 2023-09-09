@@ -2,11 +2,67 @@ import { TopHeader } from "./TopHeader";
 import { HeaderComponent } from "./HeaderComponent";
 import { Line_3 } from "../public/Line_3";
 import { Roadmap } from "./Roadmap";
-import { PlaceboxInfo } from "./PlaceboxInfo";
-import { Button } from "./Button";
 import { Footer } from "./Footer";
+import { useState } from "react";
+import axios from "axios";
+import bcrypt from "bcrypt";
+import Stal from "./Stal"
 
-export const Account = ({ override }: { override?: React.CSSProperties }) => {
+export const Account = ({ override }: { override?: React.CSSProperties },props: any) => {
+  var userName = props.firstName;
+  var id = props.id;
+  const [fname, setFname] = useState<string>("");
+  const [lname, setLname] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [adresse, setAdresse] = useState<string>("");
+  const [oldpass, setOldpass] = useState<string>("");
+  const [newpass, setNewpass] = useState<string>("");
+  const [cnewpass, setCnewpass] = useState<string>("");
+  const [msg, setmsg] = useState<string>("");
+
+  const verif = () => {
+    try {
+      const hashedOldpass = bcrypt.hash(oldpass, 10);
+      axios
+        .get(`http://localhost:5000/user/getUser/${id}`)
+        .then((res) => {
+          if (res.data.password !== hashedOldpass) {
+            setmsg("old password incorrect");
+            return false;
+          } else if (newpass !== cnewpass) {
+            setmsg("confirm your password ");
+            return false;
+          } else {
+            return true;
+          }
+        })
+        .catch((error: any) => {
+          setmsg("try again");
+          console.log(error);
+        });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+  const save = (e: any) => {
+    e.preventDefault();
+    const hashedNewpass = bcrypt.hash(newpass, 10);
+    var obj = {
+      adresse: adresse,
+      firstName: fname,
+      lasstName: lname,
+      email: email,
+      password: hashedNewpass,
+    };
+    axios
+      .put(`http://localhost:5000/user/updateUser/${id}`, obj)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div
       className="relative w-full h-[1533px] bg-white font-[Poppins] "
@@ -41,7 +97,7 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
         }}
       />
       <p className="absolute left-[1163px] top-[222px] text-sm font-normal leading-[21px]">
-        Welcome! Md Rimel
+        Welcome! {userName}
       </p>
       <p className="absolute left-[135px] top-[323px] text-black text-base font-medium leading-6">
         Manage My Account
@@ -100,25 +156,45 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
             <p className="text-black text-base font-normal leading-6">
               First Name
             </p>
-            <PlaceboxInfo placeHolder={"First Name"} tyPe={"text"} />
+            <input
+              placeholder="First Name"
+              type="text"
+              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+              style={override}
+            />
           </div>
           <div className="flex flex-col items-start gap-2">
             <p className="text-black text-base font-normal leading-6">
               Last Name
             </p>
-            <PlaceboxInfo placeHolder={"Last Name"} tyPe={"text"} />
+            <input
+              placeholder="Last Name"
+              type="text"
+              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+              style={override}
+            />
           </div>
         </div>
         <div className="flex items-start gap-[50px] absolute left-20 top-[190px]">
           <div className="flex flex-col items-start gap-2">
             <p className="text-black text-base font-normal leading-6">Email</p>
-            <PlaceboxInfo placeHolder={"Email"} tyPe={"email"} />
+            <input
+              placeholder="Email"
+              type="email"
+              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+              style={override}
+            />
           </div>
           <div className="flex flex-col items-start gap-2">
             <p className="text-black text-base font-normal leading-6">
               Address
             </p>
-            <PlaceboxInfo placeHolder={"Address"} tyPe={"text"} />
+            <input
+              placeholder="Address"
+              type="text"
+              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+              style={override}
+            />
           </div>
         </div>
         <div className="flex flex-col items-start gap-4 absolute left-20 top-[296px]">
@@ -126,36 +202,59 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
             <p className="text-black text-base font-normal leading-6">
               Password Changes
             </p>
-            <PlaceboxInfo
-              placeHolder={"old password"}
-              tyPe={"password"}
-              override={{
-                height: "50px",
-                width: "710px",
-              }}
+            <input
+              placeholder="old password"
+              type="password"
+              className="overflow-hidden rounded w-[720px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+              style={override}
             />
           </div>
-          <PlaceboxInfo
-            placeHolder={"New password"}
-            tyPe={"password"}
-            override={{
-              height: "50px",
-              width: "710px",
-            }}
+          <input
+            placeholder="New password"
+            type="password"
+            className="overflow-hidden rounded w-[720px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+            style={override}
           />
-          <PlaceboxInfo
-            placeHolder={"Confirm New password"}
-            tyPe={"password"}
-            override={{
-              height: "50px",
-              width: "710px",
-            }}
+          <input
+            placeholder="Confirm New password"
+            type="password"
+            className="overflow-hidden rounded w-[720px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+            style={override}
           />
-          <Button button="update" hover="No" />
         </div>
-        <div className="flex items-center gap-8 absolute right-20">
-          <p className="text-black text-base font-normal leading-6">Cancel</p>
-          <Button button="Primary" hover="No" />
+
+        <div className="flex items-center gap-8  absolute right-20 top-[550px]">
+          <p className="text-[rgb(219,_68,_68)] text-xl font-medium">{msg}</p>
+
+          <p
+            onClick={() => {
+              setFname("");
+              setLname("");
+              setEmail("");
+              setAdresse("");
+              setOldpass("");
+              setNewpass("");
+              setCnewpass("");
+              setmsg("");
+            }}
+            className="text-black text-base font-normal "
+          >
+            Cancel
+          </p>
+
+          <button
+            onClick={(e) => {
+              if (verif() === true) {
+                save(e);
+              } else {
+                setmsg("something wrong ! please try again");
+              }
+            }}
+            className="flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium leading-6 "
+            style={override}
+          >
+            Save changes
+          </button>
         </div>
       </div>
       <Footer

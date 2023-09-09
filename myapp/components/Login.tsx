@@ -1,4 +1,4 @@
-'use_client'
+"use_client";
 import React, { useState } from "react";
 import { TopHeader } from "./TopHeader";
 import { HeaderComponent } from "./HeaderComponent";
@@ -86,7 +86,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
       />
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
-
           <Line className="!absolute !left-0 !top-[140px]" />
           <div className="inline-flex items-center gap-[129px] absolute top-[200px] left-0">
             <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
@@ -103,22 +102,29 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                   <p className="text-black text-base font-normal leading-normal">Enter your details below</p>
                 </div>
                 <div className="inline-flex flex-col items-start gap-[40px] relative flex-[0_0_auto]">
-
                   <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input
+                      className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    ></input>
                     <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex" />
                     <div className="w-[370px] h-[0px] border border-black"></div>
                   </div>
 
-
                   <div className="w-[370px] h-8 flex-col justify-start items-start gap-2 inline-flex">
-                    <input className="opacity-80 text-black text-base font-normal leading-normal w-[370px] " type="Password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input
+                      className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
+                      type="Password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                     <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                       <div className="w-[370px] h-[0px] border border-black"></div>
                     </div>
                   </div>
-
-
                 </div>
               </div>
               <div className="inline-flex items-center gap-[87px] relative flex-[0_0_auto]">
@@ -132,7 +138,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <Footer
