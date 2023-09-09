@@ -7,8 +7,7 @@ import { Footer } from "./Footer";
 import { PlaceboxInfo } from "./PlaceboxInfo";
 import { Button } from "../public/button";
 import { Line } from "../public/line";
-import { UnderLine } from "../public/underLine";
-import { GoogleSignUp } from "../public/googleSignUp";
+
 import { IconGoogle2 } from "../public/iconGoogle2";
 import axios from "axios";
 import Link from "next/link";
