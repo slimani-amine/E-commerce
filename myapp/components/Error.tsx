@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "../public/button";
-import { Roadmap } from "../public/Roadmap";
 import Link from "next/link";
 
 export const Error = (): JSX.Element => {

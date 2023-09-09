@@ -1,7 +1,3 @@
-import { TopHeader } from "./TopHeader";
-import { HeaderComponent } from "./HeaderComponent";
-import { Line_3 } from "../public/Line_3";
-import { Footer } from "./Footer";
 import { UnderLine } from "./UnderLine";
 import Link from "next/link";
 import line_16 from "../public/line_16.svg";
@@ -22,7 +18,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       message: msg,
     };
     axios
-      .post("http://localhost:3000/contact/add", obj)
+      .post("http://localhost:5000/contact/add", obj)
       .then((result) => {
         alert("sended");
       })
@@ -36,50 +32,6 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       className="relative w-full h-[1533px] bg-white font-[Poppins] "
       style={override}
     >
-      <TopHeader
-        override={{
-          position: "absolute",
-          top: "0px",
-          left: "25px",
-        }}
-      />
-      <HeaderComponent
-        override={{
-          position: "absolute",
-          top: "88px",
-          left: "135px",
-        }}
-      />
-      <Line_3
-        override={{
-          position: "absolute",
-          top: "142px",
-          left: "0px",
-        }}
-      />
-
-      <div
-        className="flex items-center gap-3"
-        style={{
-          position: "absolute",
-          top: "222px",
-          left: "135px",
-        }}
-      >
-        <Link
-          href="/"
-          className="opacity-50 text-black text-sm font-normal leading-[21px]"
-        >
-          home
-        </Link>
-        <img className="[rotate:117.1deg] w-[13px] h-0" src={line_16.src} />
-        <Link
-          href="/"
-          className="text-black text-sm font-normal leading-[21px]"
-        >
-          Contact
-        </Link>
-      </div>
       <div className="absolute w-[800px] h-[457px] top-[323px] left-[504px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
         <div className="inline-flex flex-col items-end gap-[32px] relative top-[40px] left-[31px]">
           <div className="inline-flex items-start gap-[16px] relative flex-[0_0_auto]">
@@ -179,13 +131,6 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           </div>
         </div>
       </div>
-      <Footer
-        override={{
-          position: "absolute",
-          top: "1093px",
-          left: "25px",
-        }}
-      />
     </div>
   );
 };
