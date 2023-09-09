@@ -22,15 +22,15 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       message: msg,
     };
     axios
-      .post("http://localhost:3000/api/contact/add", obj)
+      .post("http://localhost:3000/contact/add", obj)
       .then((result) => {
-        console.log(result);
+        alert("sended");
       })
       .catch((error: any) => {
         console.log(error);
       });
   };
-  const hundlechange = (e: any) => {};
+
   return (
     <div
       className="relative w-full h-[1533px] bg-white font-[Poppins] "

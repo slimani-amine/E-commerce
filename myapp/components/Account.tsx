@@ -2,15 +2,15 @@ import { TopHeader } from "./TopHeader";
 import { HeaderComponent } from "./HeaderComponent";
 import { Line_3 } from "../public/Line_3";
 import { Roadmap } from "./Roadmap";
-import { PlaceboxInfo } from "./PlaceboxInfo";
-import { Button } from "./Button";
 import { Footer } from "./Footer";
 import { useState } from "react";
 import axios from "axios";
+import bcrypt from "bcrypt";
+import Stal from "./Stal"
 
-export const Account = ({ override }: { override?: React.CSSProperties }) => {
-  var userName = "Amine";
-  var id = 1;
+export const Account = ({ override }: { override?: React.CSSProperties },props: any) => {
+  var userName = props.firstName;
+  var id = props.id;
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -19,30 +19,43 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
   const [newpass, setNewpass] = useState<string>("");
   const [cnewpass, setCnewpass] = useState<string>("");
   const [msg, setmsg] = useState<string>("");
+
   const verif = () => {
-    axios
-      .get(`http://localhost:3000/api/user/getOne/${id}`)
-      .then((res) => {
-        if (res.data.password === oldpass) {
-          setmsg("old password incorrect");
-          return false;
-        } else if (newpass !== cnewpass) {
-          setmsg("confirm your password ");
-          return false;
-        } else {
-          return true;
-        }
-      })
-      .catch((error: any) => {
-        setmsg("try again");
-        console.log(error);
-      });
+    try {
+      const hashedOldpass = bcrypt.hash(oldpass, 10);
+      axios
+        .get(`http://localhost:5000/user/getUser/${id}`)
+        .then((res) => {
+          if (res.data.password !== hashedOldpass) {
+            setmsg("old password incorrect");
+            return false;
+          } else if (newpass !== cnewpass) {
+            setmsg("confirm your password ");
+            return false;
+          } else {
+            return true;
+          }
+        })
+        .catch((error: any) => {
+          setmsg("try again");
+          console.log(error);
+        });
+    } catch (error: any) {
+      console.log(error);
+    }
   };
-  const save = (e) => {
+  const save = (e: any) => {
     e.preventDefault();
-    var obj = {};
+    const hashedNewpass = bcrypt.hash(newpass, 10);
+    var obj = {
+      adresse: adresse,
+      firstName: fname,
+      lasstName: lname,
+      email: email,
+      password: hashedNewpass,
+    };
     axios
-      .put(`http://localhost:3000/api/user/update/${id}`, obj)
+      .put(`http://localhost:5000/user/updateUser/${id}`, obj)
       .then((res) => {
         console.log(res);
       })
@@ -208,7 +221,6 @@ export const Account = ({ override }: { override?: React.CSSProperties }) => {
             className="overflow-hidden rounded w-[720px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
             style={override}
           />
-          
         </div>
 
         <div className="flex items-center gap-8  absolute right-20 top-[550px]">
