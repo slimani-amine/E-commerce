@@ -1,9 +1,5 @@
 "use_client";
 import React, { useState } from "react";
-import { TopHeader } from "./TopHeader";
-import { HeaderComponent } from "./HeaderComponent";
-import { Line_3 } from "../public/Line_3";
-import { Roadmap } from "./Roadmap";
 import { Footer } from "./Footer";
 import { Line } from "../public/line";
 import { useRouter } from "next/router";
@@ -59,34 +55,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
       className="relative w-full h-[1533px] bg-white font-[Poppins] "
       style={override}
     >
-      <TopHeader
-        override={{
-          position: "absolute",
-          top: "0px",
-          left: "25px",
-        }}
-      />
-      <HeaderComponent
-        override={{
-          position: "absolute",
-          top: "88px",
-          left: "135px",
-        }}
-      />
-      <Line_3
-        override={{
-          position: "absolute",
-          top: "142px",
-          left: "0px",
-        }}
-      />
-      <Roadmap
-        override={{
-          position: "absolute",
-          top: "222px",
-          left: "135px",
-        }}
-      />
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
           <Line className="!absolute !left-0 !top-[140px]" />

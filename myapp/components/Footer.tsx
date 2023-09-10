@@ -1,18 +1,19 @@
-import { UnderLine } from "./UnderLine";
-import { IconCopyright } from "../public/IconCopyright";
-import { Logo } from "../public/Logo";
-import { SendMail } from "../public/SendMail";
-import { QrCode } from "../public/QrCode";
-import { GooglePlay } from "../public/GooglePlay";
 import { AppStore } from "../public/AppStore";
+import { GooglePlay } from "../public/GooglePlay";
+import { IconCopyright } from "../public/IconCopyright";
 import { IconFacebook } from "../public/IconFacebook";
-import { IconTwitter } from "../public/IconTwitter";
 import { IconInstagram } from "../public/IconInstagram";
 import { IconLinkedin } from "../public/IconLinkedin";
+import { IconTwitter } from "../public/IconTwitter";
+import { Logo } from "../public/Logo";
+import { QrCode } from "../public/QrCode";
+import { SendMail } from "../public/SendMail";
+import { UnderLine } from "./UnderLine";
+
 export const Footer = ({ override }: { override?: React.CSSProperties }) => {
   return (
     <div
-      className="overflow-hidden relative w-screen h-[440px] bg-black"
+      className="overflow-hidden relative w-full bg-black md:h-[440px]"
       style={override}
     >
       <div className="flex flex-col items-center gap-4 opacity-40 absolute left-0 top-[376px]">
@@ -31,19 +32,19 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-start gap-[87px] absolute left-[135px] top-20">
+
+      <div className="flex flex-col md:flex-row justify-around items-start p-5 md:p-20 gap-8 md:gap-[87px]">
+        {/* Logo & Subscribe */}
         <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col items-start gap-6">
-            <div className="flex flex-col items-start gap-6">
-              <Logo />
-              <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
-                Subscribe
-              </a>
-            </div>
-            <p className="text-neutral-50 text-base font-normal leading-6">
-              Get 10% off your first order
-            </p>
+            <Logo />
+            <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
+              Subscribe
+            </a>
           </div>
+          <p className="text-neutral-50 text-base font-normal leading-6">
+            Get 10% off your first order
+          </p>
           <SendMail
             override={{
               borderWidth: "1.5px",
@@ -51,7 +52,9 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
             }}
           />
         </div>
-        <div className="flex flex-col items-start gap-6">
+
+        {/* Support */}
+        <div className="flex flex-col items-start gap-4">
           <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
             Support
           </a>
@@ -67,7 +70,9 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col items-start gap-6">
+
+        {/* Account */}
+        <div className="flex flex-col items-start gap-4">
           <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
             Account
           </a>
@@ -89,7 +94,9 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col items-start gap-6">
+
+        {/* Quick Links */}
+        <div className="flex flex-col items-start gap-4">
           <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
             Quick Link
           </a>
@@ -108,7 +115,9 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col items-start gap-6">
+
+        {/* Download App & Social Links */}
+        <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col items-start gap-6">
             <a href="#" className="text-neutral-50 text-xl font-medium leading-7">
               Download App
@@ -126,24 +135,11 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
               </div>
             </div>
           </div>
-          <div className="flex items-start gap-6">
-            <a href="#" >
-              <IconFacebook />
-            </a>
-            <a href="#" >
-              <IconTwitter />
-            </a>
-
-            <a href="#" >
-
-              <IconInstagram />
-            </a>
-
-            <a href="#" >
-
-              <IconLinkedin />
-            </a>
-
+          <div className="flex flex-wrap items-start gap-6">
+            <a href="#"><IconFacebook /></a>
+            <a href="#"><IconTwitter /></a>
+            <a href="#"><IconInstagram /></a>
+            <a href="#"><IconLinkedin /></a>
           </div>
         </div>
       </div>
