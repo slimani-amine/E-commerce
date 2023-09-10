@@ -16,7 +16,8 @@ import { useRouter } from "next/router";
 
 export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
   const router = useRouter();
-
+  
+  const[error,setError]=useState<string>("")
   const [newUser, setNewUser] = useState({
     firstName : '',
     lasstName : '',
@@ -37,11 +38,12 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
     axios
       .post("http://localhost:5000/user/register", newUser)
       .then((response) => {
-        router.push("/");
+        router.push("/login");
         // window.location.reload(false);
         console.log("Successful add", response.data);
       })
       .catch((error) => console.log("Failed to add", error));
+      setError('This email is already in use !');
   };
 
   return (
@@ -138,11 +140,15 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                         type="password"
                         onChange={handleChange}
                       ></input>
+                       
                       <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                         <div className="w-[370px] h-[0px] border border-black"></div>
                       </div>
                     </div>
                   </div>
+                  <div className="text-red-500 mr-[160px]" >
+                {error && <div >{error}</div>}
+                </div>
                   <div className="gap-[16px] inline-flex flex-col items-start relative flex-[0_0_auto]">
                     <div
                       className="w-[371px] h-14 px-[122px] py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"

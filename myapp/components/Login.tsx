@@ -17,6 +17,7 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
   const [error, setError] = useState<string>("");
   const [firstName,setFirstName]= useState <string>("");
   const [id,setId]= useState <string>("");
+  const [trigger,setTrigger]=useState <boolean>(false);
   console.log(email,"email");
   console.log(password,"pass");
 
@@ -39,17 +40,19 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
         console.log('token', token);
         console.log('firstName', setFirstName(firstName));
         console.log('id', setId(id));
-        router.push('/');
+        router.push('/dropdown');
       } else {
         throw new Error('Invalid email or password');
       }
     } catch (err) {
       console.error(err, 'the error');
-      setError(err.message || 'Invalid email or password');
+      setError('Invalid email or password');
     }
   };
 
-  
+
+
+
 
   return (
     <div
@@ -125,6 +128,11 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                       <div className="w-[370px] h-[0px] border border-black"></div>
                     </div>
                   </div>
+
+                  <div className="text-red-500" >
+                {error && <div >{error}</div>}
+                </div>
+
                 </div>
               </div>
               <div className="inline-flex items-center gap-[87px] relative flex-[0_0_auto]">

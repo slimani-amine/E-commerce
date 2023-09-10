@@ -3,7 +3,12 @@ const app= expresss()
 const db=require("./models")
 const userRoutes = require("./router/user-router")
 const productsRoutes = require("./router/products")
+const wishListRoutes = require("./router/wishList")
 const reviewRoutes = require("./router/review-router")
+const contactRoutes = require("./router/contact")
+const cartRoutes = require("./router/cart")
+
+
 const cors = require("cors")
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
@@ -11,8 +16,13 @@ const { google } = require('googleapis');
 app.use(cors())
 app.use(expresss.json())
 app.use(expresss.urlencoded({extended:true}))
+
+
 app.use("/user",userRoutes)
+app.use("/contact",contactRoutes)
+app.use("/cart",cartRoutes)
 app.use("/products",productsRoutes)
+app.use("/wishList",wishListRoutes)
 app.use("/review",reviewRoutes)
 
 // const OAuth2 = google.auth.OAuth2;
