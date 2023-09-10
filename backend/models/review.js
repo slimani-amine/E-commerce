@@ -25,13 +25,21 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Review.associate = (models) => {
-    Review.belongsTo(models.User, {
+    Review.belongsToMany(models.User, {
+      through: "UserReview", 
       onDelete: "cascade",
     });
-    Review.belongsTo(models.Products, {
+    Review.belongsToMany(models.Products, {
+      through: "ProductReview", 
+      onDelete: "cascade",
+    });
+
+    Review.belongsToMany(models.WishList, {
+      through: "WishListReview", 
       onDelete: "cascade",
     });
   };
+
 
   return Review;
 };

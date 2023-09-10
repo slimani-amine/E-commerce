@@ -4,8 +4,8 @@ const route = express.Router();
 const db =require ("../models/index")
 
 
-route.post("/createProducts", (req, res) => {
- db.Products.create({
+route.post("/createWishList", (req, res) => {
+ db.WishList.create({
     name:req.body.name,
     description:req.body.description,
     category:req.body.category,
@@ -23,8 +23,8 @@ route.post("/createProducts", (req, res) => {
     });
 });
 
-route.get("/getOneProducts/:id", (req, res) => {
-  db.Products.findOne({ where: { id: req.params.id } })
+route.get("/getOneWishList/:id", (req, res) => {
+  db.WishList.findOne({ where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -33,8 +33,8 @@ route.get("/getOneProducts/:id", (req, res) => {
     });
 });
 
-route.get("/getAllProducts", (req, res) => {
-  db.Products.findAll()
+route.get("/getAllWishList", (req, res) => {
+  db.WishList.findAll()
     .then((result) => {
       res.status(200).json(result);
     })
@@ -43,8 +43,8 @@ route.get("/getAllProducts", (req, res) => {
     });
 });
 
-route.put("/updateOneProducts/:id", (req, res) => {
-  db.Products.update(req.body, { where: { id: req.params.id } })
+route.put("/updateOneWishList/:id", (req, res) => {
+  db.WishList.update(req.body, { where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -53,8 +53,8 @@ route.put("/updateOneProducts/:id", (req, res) => {
     });
 });
 
-route.delete("/deleteOneProducts/:id", (req, res) => {
-  db.Products.destroy({ where: { id: req.params.id } })
+route.delete("/deleteOneWishList/:id", (req, res) => {
+  db.WishList.destroy({ where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json(result);
     })

@@ -89,7 +89,13 @@ console.log(comparing,"comparing");
   }
 });
 
+////////////////////////// logout  ////////////////////////////////////
 
+// router.post('/logout', verifyToken, (req, res) => {
+//   localStorage.removeItem('token');
+//   res.json({ message: 'Logout successful' });
+// });
+//////////////////////////////////////////////////////////////////////
 
 route.get("/getUser/:id",  (req, res) => {
   User.findOne({ where: { id: req.params.id }},{includes : [User.id]})
