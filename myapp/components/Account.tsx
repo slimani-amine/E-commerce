@@ -12,7 +12,7 @@ interface AccountProps {
 export const Account: React.FC<AccountProps> = ({
   override,
   firstName,
-  id,
+  id
 }) => {
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
@@ -83,27 +83,6 @@ export const Account: React.FC<AccountProps> = ({
       className="relative w-full h-[1533px] bg-white font-[Poppins]"
       style={override}
     >
-      <div
-        className="flex items-center gap-3"
-        style={{
-          position: "absolute",
-          top: "222px",
-          left: "135px",
-        }}
-      >
-        <Link
-          href="/"
-          className="opacity-50 text-black text-sm font-normal leading-[21px]"
-        >
-          home
-        </Link>
-        <Link
-          href="/account"
-          className="text-black text-sm font-normal leading-[21px]"
-        >
-          account
-        </Link>
-      </div>
       <p className="absolute left-[1163px] top-[222px] text-sm font-normal leading-[21px]">
         Welcome! {firstName}
       </p>
@@ -164,39 +143,43 @@ export const Account: React.FC<AccountProps> = ({
             <p className="text-black text-base font-normal leading-6">
               First Name
             </p>
+            <div className="flex">
+              <input
+                placeholder="First Name"
+                type="text"
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
+                className="overflow-hidden mr-4 rounded w-[350px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                style={override}
+              />
+              <input
+                placeholder="Last Name"
+                type="text"
+                value={lname}
+                onChange={(e) => setLname(e.target.value)}
+                className="overflow-hidden rounded w-[350px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                style={override}
+              />
+            </div>
+            <div className="flex">
+              <input
+                placeholder="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="overflow-hidden mr-4 rounded w-[350px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                style={override}
+              />
+              <input
+                placeholder="Address"
+                type="text"
+                value={adresse}
+                onChange={(e) => setAdresse(e.target.value)}
+                className="overflow-hidden rounded w-[350px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                style={override}
+              />
+            </div>
 
-            <input
-              placeholder="First Name"
-              type="text"
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
-              style={override}
-            />
-            <input
-              placeholder="Last Name"
-              type="text"
-              value={lname}
-              onChange={(e) => setLname(e.target.value)}
-              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
-              style={override}
-            />
-            <input
-              placeholder="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
-              style={override}
-            />
-            <input
-              placeholder="Address"
-              type="text"
-              value={adresse}
-              onChange={(e) => setAdresse(e.target.value)}
-              className="overflow-hidden rounded w-[333px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
-              style={override}
-            />
             <input
               placeholder="old password"
               type="password"
@@ -223,7 +206,7 @@ export const Account: React.FC<AccountProps> = ({
             />
             <button
               onClick={handleSave}
-              className="flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium leading-6"
+              className="flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium "
               style={override}
             >
               Save changes

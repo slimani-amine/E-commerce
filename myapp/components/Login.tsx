@@ -25,14 +25,12 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
         email,
         password,
       })
-  
       if (response.status === 200) {
         const  token  = response.data.token;
         const firstName=response.data.firstName;
         const id =response.data.id;
         localStorage.setItem('token', token); 
         // <Stal firstName={firstName} id={id}>
-
         console.log('token', token);
         console.log('firstName', setFirstName(firstName));
         console.log('id', setId(id));
