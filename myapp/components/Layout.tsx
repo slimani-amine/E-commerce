@@ -12,37 +12,13 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
-    {props.children}
-      <TopHeader
-        override={{
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-        }}
-      />
-      <HeaderComponent
-        override={{
-          position: "absolute",
-          top: "88px",
-          left: "135px",
-        }}
-      />
-      <Line_3
-        override={{
-          position: "absolute",
-          top: "142px",
-          left: "0px",
-        }}
-      />
+      <TopHeader />
+      <HeaderComponent />
+      <Line_3 />
       <Roadmap
-        override={{
-          position: "absolute",
-          top: "222px",
-          left: "135px",
-        }}
       />
-      
-      <Footer/>
+      {props.children}
+      <Footer />
     </>
   );
 };
