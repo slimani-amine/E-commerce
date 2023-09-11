@@ -1,0 +1,142 @@
+[{
+    "name": "Micro Casque Gaming OCDAY G2000",
+    "description": "Casque Gamer Xbox One avec Micro Anti Bruit LED Lampe Audio Stéréo Basse avec Micro 3.5mm Jack pour PS4/ Xbox One/PC/Mac/Nintendo Switch/Ordinateur/Tablette/Smartephone ",
+    "category": "HeadPhones",
+    "images": "https://m.media-amazon.com/images/I/71jCPGfU3oL._AC_UF1000,1000_QL80_.jpg",
+    "colours": "blue",
+    "price": "$26,99"
+
+  },
+  {
+   
+    "name": "Micro Casque Gaming G-Lab Korp",
+    "description": "Ultra Léger, Fortes Basses - Micro 3.5mm Jack pour PC PS4 PS5 Xbox One Mac Nintendo Switch Tablette Laptop Smartphone ",
+    "category": "HeadPhones",
+    "images": "https://m.media-amazon.com/images/I/6149X4D5OdL._AC_UF1000,1000_QL80_.jpg",
+    "colours": "white",
+    "price": "$19,90"
+
+  },
+  {
+    "name": "Micro Casque Gaming ASUS ROG Delta RGB",
+    "description": "ASUS ROG Delta RGB Gaming Headset with Hi-Res ESS Quad-DAC, Circular RGB Lighting Effect and USB-C Connector for PCs, Consoles and Mobile Gaming",
+    "category": "HeadPhones",
+    "images": "https://m.media-amazon.com/images/I/61ucbTqrV4L.jpg",
+    "colours": "black",
+    "price": "$25,99"
+  },
+  {
+    "name": "Micro Casque Gaming ASUS ROG Delta RGB",
+    "description": "ASUS ROG Delta RGB Gaming Headset with Hi-Res ESS Quad-DAC, Circular RGB Lighting Effect and USB-C Connector for PCs, Consoles and Mobile Gaming",
+    "category": "HeadPhones",
+    "images": "https://m.media-amazon.com/images/I/61AcBHEg1vL.jpg",
+    "colours": "white",
+    "price": "$25,99"
+  },
+  {
+    "name": "Apple iPhone 14",
+    "description": "Apple iPhone 14, 128GB, Midnight - Unlocked (Renewed Premium",
+    "category": "Phones",
+    "images": "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF894,1000_QL80_.jpg",
+    "colours": "white",
+    "price": "$1300"
+  },
+  {
+    "name": "S23 ultra",
+    "description": "SAMSUNG Galaxy S23 Ultra Cell Phone, Factory Unlocked Android Smartphone, 512GB, 200MP Camera, Night Mode, Long Battery Life, S Pen, US Version, 2023,",
+    "category": "Phones",
+    "images": "https://m.media-amazon.com/images/I/718LuUVEOZL.jpg",
+    "colours": "lavender",
+    "price": "$1400"
+  },
+  {
+    "name": "Xiaomi Mi 11 Ultra",
+    "description": "Xiaomi Mi 11 Ultra Smartphone Débloqué 17,3 cm (6.81) Double SIM MIUI 12 5G USB Type-C 12 Go 256 Go 5000 mAh ",
+    "category": "Phones",
+    "images": "https://m.media-amazon.com/images/I/51VT-Hpx-bS._AC_UF894,1000_QL80_.jpg",
+    "colours": "black",
+    "price": "$500"
+
+  },
+  {
+    "name": "ASUS ROG Strix G17 (2023) ",
+    "description": "ASUS ROG Strix G17 (2023) Gaming Laptop, 17.3” QHD 240Hz, GeForce RTX 4060, AMD Ryzen 9 7945HX, 16GB DDR5, 1TB PCIe SSD, Wi-Fi 6E, Windows 11, G713PV-DS94, Eclipse Gray ",
+    "category": "Computers",
+    "images": "https://m.media-amazon.com/images/I/71z0om-Cz1L._AC_UF894,1000_QL80_.jpg",
+    "colours": "black",
+    "price": "$1350"
+  },
+  {
+    "name": "MSI GF63",
+    "description": "Newest MSI GF63 Premium Gaming Laptop, 15.6 FHD Thin-Bezel Display,10th Gen Intel Quad-Core i5-10300H, 16GB RAM, 1TB SSD, GeForce GTX 1650 4GB, Backlit Keyboard, Windows 10",
+    "category": "Computers",
+    "images": "https://m.media-amazon.com/images/I/716sWoIVxDS._AC_UF894,1000_QL80_.jpg",
+    "colours": "black",
+    "price": "$1500"
+  },
+  {
+    "name": "ASUS TUF Gaming F15 Gaming Laptop",
+    "description": "ASUS TUF Gaming F15 Gaming Laptop, 15.6” 144Hz FHD Display, Intel Core i5-11400H Processor, GeForce RTX 2050, 8GB DDR4 RAM, 512GB PCIe SSD Gen 3, Wi-Fi 6, Windows 11, FX506HF-ES51,Graphite ",
+    "category": "Computers",
+    "images": "https://m.media-amazon.com/images/I/91aWfctUptL.jpg",
+    "colours": "black",
+    "price": "$900"
+
+  },
+  {
+    "name": "Amazfit GTS 4 Mini",
+    "description": "Amazfit GTS 4 Mini Smart Watch for Women Men, Alexa Built-in, GPS, Fitness Tracker with 120+ Sport Modes, 15-Day Battery Life, Heart Rate Blood Oxygen Monitor, Android Phone iPhone Compatible-Black",
+    "category": "SmartWatch",
+    "images": "https://m.media-amazon.com/images/I/81JF4YAXpWL._AC_UF894,1000_QL80_.jpg",
+    "colours": "black",
+    "price": "$99"
+  },
+  {
+    "name": "Amazfit GTS 4",
+    "description": "Amazfit GTS 4 Smart Watch for Women, Dual-Band GPS, Alexa Built-in, Bluetooth Calls, 150+ Sports Modes, Heart Rate SPO₂ Monitor, 1.75” AMOLED Display, Health Fitness Watch for Android iPhone, Pink",
+    "category": "SmartWatch",
+    "images": "https://m.media-amazon.com/images/I/612PIQWxMeL._AC_UF894,1000_QL80_.jpg",
+    "colours": "pink",
+    "price": "$199"
+  },
+  {
+    "name": "Amazfit GTS 4",
+    "description": "Amazfit GTS 4 Montre Connectée Alexa, Appel Bluetooth, 1.75 AMOLED, SpO2, 150+ Modes Sportifs, GPS Smartwatch Version Française Bracelet en Nylon Brun",
+    "category": "SmartWatch",
+    "images": "https://m.media-amazon.com/images/I/71kkygTgiDL.jpg",
+    "colours": "brown",
+    "price": "$199"
+  },
+  {
+    "name": "Apple Watch SE (2nd Gen)",
+    "description": "Apple Watch SE (2nd Gen) [GPS 40mm] Smart Watch w/Midnight Aluminum Case & Midnight Sport Band - S/M. Fitness & Sleep Tracker, Crash Detection, Heart Rate Monitor, Retina Display, Water Resistant",
+    "category": "SmartWatch",
+    "images": "https://m.media-amazon.com/images/I/71LfnkRgZ4L._AC_UF894,1000_QL80_.jpg",
+    "colours": "pink",
+    "price": "$170"
+  },
+  {
+    "name": "Canon EOS Rebel T7 DSLR",
+    "description": "Canon EOS Rebel T7 DSLR Camera with 18-55mm Lens | Built-in Wi-Fi | 24.1 MP CMOS Sensor | DIGIC 4+ Image Processor and Full HD Videos",
+    "category": "Camera",
+    "images": "https://m.media-amazon.com/images/I/71EWRyqzw0L._AC_UF894,1000_QL80_.jpg",
+    "colours": "black",
+    "price": "$580"
+  },
+  {
+    "name": "PC Gamer Complet",
+    "description": "BEASTCOM Q3 | PC Gamer Complet | AMD Ryzen 3 4X 4,00 GHz | 16Go RAM | 256Go SSD + 1To | 4K Vega 8 cœurs | Écran LED 24 + Clavier + Souris + Tapis de Souris | HDMI | WiFi | Windows 11 Pro",
+    "category": "Gaming",
+    "images": "https://m.media-amazon.com/images/I/71hMurr27IL.jpg",
+    "colours": "black",
+    "price": "$720"
+  },
+  {
+    "name": "PC Gamer Complet",
+    "description": "Vibox VIII-214 SG PC Gamer - 27 165Hz Écran Pack Incurvé - Intel i9 11900F Processeur 5.2GHz - Nvidia RTX 4090 24Go - 32Go RAM - 2To NVMe M.2 SSD - 1000W PSU - Windows 11 - WiFi",
+    "category": "Gaming",
+    "images": "https://m.media-amazon.com/images/I/712H-Mqd8-L._AC_UF1000,1000_QL80_.jpg",
+    "colours": "white",
+    "price": "$1600"
+  }
+]
