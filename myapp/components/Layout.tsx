@@ -14,9 +14,9 @@ const Layout: React.FC<LayoutProps> = (props) => {
     <>
       <TopHeader />
       <HeaderComponent />
-      <Line_3 />
-      <Roadmap
-      />
+      <hr />
+      <br/><br/><br/><br/><br/><br/>
+      <Roadmap />
       {props.children}
       <Footer />
     </>

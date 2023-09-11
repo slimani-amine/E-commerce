@@ -6,14 +6,9 @@ import Link from "next/link";
 interface AccountProps {
   override?: React.CSSProperties;
   firstName: string;
-  id: string;
 }
 
-export const Account: React.FC<AccountProps> = ({
-  override,
-  firstName,
-  id
-}) => {
+export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -22,11 +17,31 @@ export const Account: React.FC<AccountProps> = ({
   const [newpass, setNewpass] = useState<string>("");
   const [cnewpass, setCnewpass] = useState<string>("");
   const [msg, setmsg] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+
+  const jwt = require("jsonwebtoken");
+
+  // Assume this is your JWT token
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+
+  // Decode the token (without verifying)
+  const decodedToken = jwt.decode(token);
+
+  // Extract idUser from the token
+  const idUser = decodedToken.id;
+
+  console.log(idUser);
 
   const verif = async () => {
     try {
       const hashedOldpass = await bcrypt.hash(oldpass, 10);
-      const res = await axios.get(`http://localhost:5000/user/getUser/${id}`);
+      const res = await axios.get(
+        `http://localhost:5000/user/getUser/${idUser}`
+      );
+      setUserName(res.data.firstName);
       if (res.data.password !== hashedOldpass) {
         setmsg("Old password is incorrect.");
         return false;
@@ -56,7 +71,7 @@ export const Account: React.FC<AccountProps> = ({
       };
       try {
         const res = await axios.put(
-          `http://localhost:5000/user/updateUser/${id}`,
+          `http://localhost:5000/user/updateUser/${idUser}`,
           obj
         );
         console.log(res);

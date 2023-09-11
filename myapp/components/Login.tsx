@@ -49,8 +49,7 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
 
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins] "
-      style={override}
+      className="relative w-full  bg-white font-[Poppins] "
     >
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
@@ -113,13 +112,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
           </div>
         </div>
       </div>
-      <Footer
-        override={{
-          position: "absolute",
-          top: "1093px",
-          left: "25px",
-        }}
-      />
     </div>
   );
 };

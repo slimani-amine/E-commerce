@@ -35,30 +35,26 @@ export const HeaderComponent = ({
   } else {
     console.log("Token is not open/invalid.");
   }
+  const decodedToken = jwt.decode(token);
+  const idUser = decodedToken.id;
 
   return (
-    <div
-      className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px] mt-15px"
-      style={override}
-    >
-      <div className="flex flex-wrap items-start md:gap-40 mt-50px">
+    <div className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px] mt-5">
+      <div className="flex flex-wrap items-start md:gap-40 ml-10 ">
         <Logo />
-
-        <div className="flex flex-wrap items-start gap-4 md:gap-12 mt-2 md:mt-0">
+        <div className="flex flex-wrap items-start gap-4 md:gap-12  ">
           <Header header="Header-Home Hover" />
           <Header header="Contact" />
           <Header header="About" />
           <Header header="Sign Up" />
         </div>
       </div>
-
       <div className="flex flex-wrap items-center gap-4 mt-2 md:mt-0">
         <SearchComponentSet property_1="Active" />
-
         <div className="flex items-center gap-4">
-          <Wishlist wishlist="off" />
-          <Cart1WithBuy cart="off" />
-          <User user={onoff} />
+          <Wishlist wishlist={onoff} />
+          <Cart1WithBuy cart={onoff} />
+          <User user={onoff} idUser={idUser} />
         </div>
       </div>
     </div>

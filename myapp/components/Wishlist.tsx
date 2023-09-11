@@ -1,48 +1,31 @@
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
   const [trigger, setTrigger] = useState(false);
-  const [dataa, setData] = useState([]);
-  // useEffect(()=>{
-  //   axios.get("http://localhost:5000/wishlist/getAll").then((result) => {
-  //     setData(result.data)
-  //   }).catch((error: any) => {
-  //     console.log(error);
-  //   });
-  // },[trigger])
-
-  var data = [
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    axios.get("http://localhost:5000/wishlist/getAll").then((result) => {
+      setData(result.data)
+    }).catch((error: any) => {
+      console.log(error);
+    });
+  },[trigger])
+  const deleteItem = (id: any) => {
+    axios
+      .delete(`http://localhost:5000/wishlist/delete/${id}`)
+      .then((result) => {
+        setTrigger(!trigger);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
   return (
-    
     <div
       className="mt-150 relative w-full h-[1533px] bg-white font-[Poppins] "
       style={override}
     >
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
       <div className="py-12">
         <div className="hidden sm:flex flex-col justify-start items-start">
           <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
@@ -95,13 +78,20 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                         <p className="dark:text-white">{e.price}</p>
                       </th>
                       <th className="my-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
-                        <button className="hover:underline text-base font-medium leading-none text-gray-800 dark:text-white focus:outline-none focus:underline">
+                        <Link href={`/details?id=${e.id}`}>
+                        <button className="hover:underline text-base font-medium leading-none text-gray-800 dark:text-white focus:outline-none focus:underline " onClick={()=>{}}>
                           View details
                         </button>
+                        </Link>
                       </th>
                       <th className="my-10 pl-4 lg:pl-12 2xl:pl-28 pr-4 2xl:pr-20">
-                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800">
-                          <p>Remove Item</p>
+                        <button
+                          className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800"
+                          onClick={() => {
+                            deleteItem(e.id);
+                          }}
+                        >
+                          Remove Item
                         </button>
                       </th>
                     </tr>
