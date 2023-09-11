@@ -1,5 +1,5 @@
 "use_client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Footer } from "./Footer";
 import { Line } from "../public/line";
 import { useRouter } from "next/router";
@@ -45,7 +45,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
       setError('Invalid email or password');
     }
   };
-
 
 
 
