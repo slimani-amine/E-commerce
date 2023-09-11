@@ -16,23 +16,6 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
       className="overflow-hidden relative w-full bg-black md:h-[440px]"
       style={override}
     >
-      <div className="flex flex-col items-center gap-4 opacity-40 absolute left-0 top-[376px]">
-        <UnderLine
-          override={{
-            height: "0px",
-            width: "1440px",
-          }}
-        />
-        <div className="flex items-center opacity-60">
-          <div className="flex items-center gap-1.5">
-            <IconCopyright />
-            <p className="text-white text-base font-normal leading-6">
-              Copyright Rimel 2022. All right reserved
-            </p>
-          </div>
-        </div>
-      </div>
-
       <div className="flex flex-col md:flex-row justify-around items-start p-5 md:p-20 gap-8 md:gap-[87px]">
         {/* Logo & Subscribe */}
         <div className="flex flex-col items-start gap-4">
@@ -140,6 +123,23 @@ export const Footer = ({ override }: { override?: React.CSSProperties }) => {
             <a href="#"><IconTwitter /></a>
             <a href="#"><IconInstagram /></a>
             <a href="#"><IconLinkedin /></a>
+          </div>
+        </div>
+        
+      </div>
+      <div className="flex flex-col items-center gap-4 opacity-40 ">
+        <UnderLine
+          override={{
+            height: "0px",
+            width: "1440px",
+          }}
+        />
+        <div className="flex items-center opacity-60">
+          <div className="flex items-center gap-1.5">
+            <IconCopyright />
+            <p className="text-white text-base font-normal leading-6">
+              Copyright Rimel 2022. All right reserved
+            </p>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
-     {props.children}
+    {props.children}
       <TopHeader
         override={{
           position: "absolute",
@@ -41,14 +41,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
           left: "135px",
         }}
       />
-     
-      <Footer
-        override={{
-          position: "absolute",
-          top: "1093px",
-          left: "0px",
-        }}
-      />
+      
+      <Footer/>
     </>
   );
 };
