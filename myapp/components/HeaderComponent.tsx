@@ -38,10 +38,10 @@ export const HeaderComponent = ({
 
   return (
     <div
-      className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px]"
+      className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px] mt-15px"
       style={override}
     >
-      <div className="flex flex-wrap items-start md:gap-40">
+      <div className="flex flex-wrap items-start md:gap-40 mt-50px">
         <Logo />
 
         <div className="flex flex-wrap items-start gap-4 md:gap-12 mt-2 md:mt-0">
