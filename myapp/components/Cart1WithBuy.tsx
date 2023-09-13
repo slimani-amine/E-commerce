@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { Cart1 } from "./Cart1";
+import { Badge } from "antd";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export const Cart1WithBuy = ({
   override,
   cart,
@@ -7,9 +11,27 @@ export const Cart1WithBuy = ({
   override?: React.CSSProperties;
   cart: string;
 }) => {
+  const [trigger, setTrigger] = useState<boolean>(false);
+  const [cartshop, setcartshop] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/products/getAllProducts")
+      .then((result) => {
+        setcartshop(result.data.length);
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }, [trigger]);
+
+
   switch (cart) {
     case "On":
       return (
+
+        <Link href="/wishlist">
+        <Badge count={cartshop}>
         <div className="relative w-8 h-8" style={override}>
           <Cart1
             override={{
@@ -20,15 +42,14 @@ export const Cart1WithBuy = ({
               bottom: "0%",
             }}
           />
-          <div>
-            <div className="absolute left-[93.75%] -right-[90.75%] w-full top-[11.76%] -bottom-[6%] h-[94.12%] bg-[rgb(219,_68,_68)] rounded-[50%]" />
-            <Link href="/cart" className="absolute left-[125%] -right-[68.75%] w-[43.75%] top-[5.50%] -bottom-[5.88%] h-full text-neutral-50 text-xs font-normal leading-[18px]">
-              2
-            </Link>
-          </div>
+
         </div>
+        </Badge>
+      </Link>
+
+
       );
-    case "Off":
+    case "off":
       return (
         <div className="relative w-6 h-6" style={override}>
           <Cart1

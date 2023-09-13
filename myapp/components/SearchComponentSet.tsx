@@ -9,15 +9,7 @@ export const SearchComponentSet = ({
     case "Active":
       return (
         <input
-          className="flex flex-col justify-center items-center pl-5 pr-3 py-[7px] rounded bg-neutral-100 "
-          style={override}
-          placeholder="What are you looking for?"
-        />
-      );
-    case "Default":
-      return (
-        <input
-          className="flex flex-col justify-center items-center pl-5 pr-3 py-[7px] rounded bg-neutral-100"
+          className="flex flex-col justify-center items-center pl-5 pr-3 py-[17px] rounded bg-neutral-100 w-[230px] "
           style={override}
           placeholder="What are you looking for?"
         />

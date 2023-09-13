@@ -15,7 +15,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
       <TopHeader />
       <HeaderComponent />
       <hr />
-      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/>
+      <br/><br/>
       <Roadmap />
       {props.children}
       <Footer />

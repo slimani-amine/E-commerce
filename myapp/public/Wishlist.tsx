@@ -1,31 +1,44 @@
-import wishlistOff from "../public/wishlistOff.svg";
+import React, { useEffect, useState } from "react";
 import vector from "../public/vector.svg";
-export const Wishlist = ({
-  override,
-  wishlist,
-}: {
-  override?: React.CSSProperties;
+import Link from "next/link";
+import { Badge } from "antd";
+import axios from "axios";
+
+interface WishlistProps {
   wishlist: string;
-}) => {
+}
+
+const Wishlist: React.FC<WishlistProps> = ({ wishlist }: WishlistProps) => {
+  const [trigger, setTrigger] = useState<boolean>(false);
+  const [wish, setWish] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/wishList/getAllWishList")
+      .then((result) => {
+        setWish(result.data.length);
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }, [trigger]);
+
   switch (wishlist) {
-    case "Off":
-      return <img className="w-8 h-8" src={wishlistOff.src} style={override} />;
+    case "off":
+      return null;
     case "On":
       return (
-        <div className="overflow-hidden relative w-8 h-8" style={override}>
-          <img
-            className="absolute left-[18.75%] right-[18.75%] w-[62.5%] top-[21.88%] bottom-[21.88%] h-[56.25%]"
-            src={vector.src}
-          />
-          <div>
-            <div className="absolute left-full -right-full w-full top-[5.88%] bottom-[0%] h-[94.12%] bg-[rgb(219,_68,_68)] rounded-[50%]" />
-            <p className="absolute left-[125%] -right-[68.75%] w-[43.75%] top-[0%] bottom-[0%] h-full text-neutral-50 text-xs font-normal leading-[18px]">
-              4
-            </p>
-          </div>
+        <div className="mt-5">
+          <Link href="/wishlist">
+            <Badge count={wish}>
+              <img src={vector.src} alt="Wishlist Icon" />
+            </Badge>
+          </Link>
         </div>
       );
     default:
       return null;
   }
 };
+
+export default Wishlist;

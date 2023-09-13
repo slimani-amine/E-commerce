@@ -1,6 +1,5 @@
 import { UnderLine } from "./UnderLine";
 import Link from "next/link";
-import line_16 from "../public/line_16.svg";
 import axios from "axios";
 import { useState } from "react";
 
@@ -29,10 +28,10 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
 
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins] "
+      className="relative w-full h-[800px] bg-white font-[Poppins] "
       style={override}
     >
-      <div className="absolute w-[800px] h-[457px] top-[323px] left-[504px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
+      <div className="absolute w-[800px] h-[457px] top-[023px] left-[504px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
         <div className="inline-flex flex-col items-end gap-[32px] relative top-[40px] left-[31px]">
           <div className="inline-flex items-start gap-[16px] relative flex-[0_0_auto]">
             <div className="relative w-[235px] h-[50px] bg-neutral-100 rounded-[4px]">
@@ -93,11 +92,11 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           </Link>
         </div>
       </div>
-      <div className="absolute w-[340px] h-[457px] top-[323px] left-[135px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
+      <div className="absolute w-[340px] h-[457px] top-[23px] left-[135px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
         <div className="inline-flex flex-col items-start gap-[32px] relative top-[40px] left-[35px]">
           <div className="inline-flex flex-col items-start gap-[24px] relative flex-[0_0_auto]">
             <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
-              <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-black text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
+              <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-red-500 text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
                 Call To Us
               </div>
             </div>
@@ -113,7 +112,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           <UnderLine />
           <div className="inline-flex flex-col items-start gap-[24px] relative flex-[0_0_auto]">
             <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
-              <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-black text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
+              <div className="relative w-fit [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-red-500 text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap ">
                 Write To US
               </div>
             </div>

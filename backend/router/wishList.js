@@ -1,20 +1,18 @@
 const express = require("express");
 const route = express.Router();
-// const { db, bussiness } = require('../models/index.js'); 
-const db =require ("../models/index")
-
+// const { db, bussiness } = require('../models/index.js');
+const db = require("../models/index");
 
 route.post("/createWishList", (req, res) => {
- db.WishList.create({
-    name:req.body.name,
-    description:req.body.description,
-    category:req.body.category,
-    images:req.body.images,
-    colours:req.body.colours,
-    size:req.body.size,
-    price:req.body.price
-
- })
+  db.WishList.create({
+    name: req.body.name,
+    description: req.body.description,
+    category: req.body.category,
+    images: req.body.images,
+    colours: req.body.colours,
+    size: req.body.size,
+    price: req.body.price,
+  })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -62,5 +60,18 @@ route.delete("/deleteOneWishList/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
+route.delete("/deleteAllWishList", (req, res) => {
+  db.WishList.destroy({
+    truncate: true,
+    cascade: false
+  })
+  .then((result) => {
+    res.status(200).json({ message: 'All wishlist items deleted successfully!' });
+  })
+  .catch((err) => {
+    res.status(500).json(err);
+  });
+});
+
 
 module.exports = route;
