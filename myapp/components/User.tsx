@@ -4,7 +4,7 @@ import userOn from "../public/userOn.svg";
 import { useState } from "react";
 import { List, ListItem, Card } from "@material-tailwind/react";
 
-export const User = ({ user, iduser }: { user: string; iduser: String }) => {
+export const User = ({ user, iduser }: { user: String; iduser: String }) => {
   const [href, setHref] = useState("/logIn");
   const [hidden, setHidden] = useState(false);
   let userSrc;

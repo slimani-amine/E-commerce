@@ -76,6 +76,7 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
         password: hashedNewpass,
       };
       try {
+        console.log(obj ,"obj");
         const res = await axios.put(
           `http://localhost:5000/user/updateUser/${idUser}`,
           obj

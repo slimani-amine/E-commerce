@@ -7,47 +7,44 @@ import axios from "axios";
 export const Cart1WithBuy = ({
   override,
   cart,
+  iduser,
 }: {
   override?: React.CSSProperties;
   cart: string;
+  iduser: String;
 }) => {
-  const [trigger, setTrigger] = useState<boolean>(false);
+
   const [cartshop, setcartshop] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products/getAllProducts")
+      .get(`http://localhost:5000/cart/getAllCart/${iduser}`)
       .then((result) => {
         setcartshop(result.data.length);
       })
       .catch((error: any) => {
         console.error(error);
       });
-  }, [trigger]);
-
+  }, []);
 
   switch (cart) {
     case "On":
       return (
-
-        <Link href="/wishlist">
-        <Badge count={cartshop}>
-        <div className="relative w-8 h-8" style={override}>
-          <Cart1
-            override={{
-              position: "absolute",
-              top: "25%",
-              left: "3.13%",
-              right: "21.88%",
-              bottom: "0%",
-            }}
-          />
-
-        </div>
-        </Badge>
-      </Link>
-
-
+        <Link href={`/cart?userid:${iduser}`}>
+          <Badge count={cartshop}>
+            <div className="relative w-8 h-8" style={override}>
+              <Cart1
+                override={{
+                  position: "absolute",
+                  top: "25%",
+                  left: "3.13%",
+                  right: "21.88%",
+                  bottom: "0%",
+                }}
+              />
+            </div>
+          </Badge>
+        </Link>
       );
     case "off":
       return (

@@ -1,7 +1,7 @@
 import { Logo } from "../public/Logo";
 import { Header } from "./Header";
 import { SearchComponentSet } from "./SearchComponentSet";
-import Wishlist from "../public/Wishlist";
+import {Wishlist} from "../public/Wishlist";
 import { Cart1WithBuy } from "./Cart1WithBuy";
 import { User } from "./User";
 
@@ -40,7 +40,7 @@ export const HeaderComponent = ({}: {}) => {
   return (
     <div className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px] mt-5">
       <div className="flex flex-wrap items-start md:gap-40 ml-10 ">
-        <Logo />
+        <Logo user={idUser === "0" ? "On" : "off"} />
         <div className="flex flex-wrap items-start gap-4 md:gap-12  ">
           <Header
             user={idUser === "0" ? "off" : "On"}
@@ -54,8 +54,8 @@ export const HeaderComponent = ({}: {}) => {
       <div className="flex flex-wrap items-center gap-4 mt-2 md:mt-0">
         <SearchComponentSet property_1="Active" />
         <div className="flex items-center gap-4">
-          <Wishlist wishlist={idUser === "0" ? "off" : "On"} />
-          <Cart1WithBuy cart={idUser === "0" ? "off" : "On"} />
+          <Wishlist wishlist={idUser === "0" ? "off" : "On"} iduser={idUser}/>
+          <Cart1WithBuy cart={idUser === "0" ? "off" : "On"} iduser={idUser}/>
           <User user={idUser === "0" ? "off" : "On"} iduser={idUser} />
         </div>
       </div>

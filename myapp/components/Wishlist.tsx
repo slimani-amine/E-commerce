@@ -9,41 +9,23 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
   const [trigger, setTrigger] = useState(false);
   const [data, setData] = useState([]);
   const [dataforyou, setDataforyou] = useState([]);
-  // var damydata = [
-  //   {
-  //     id: 1,
-  //     image:
-  //       "https://c.animaapp.com/FOn2hBvi/img/547953-9c2st-8746-001-082-0000-light-gucci-savoy-medium-duffle-b@2x.png",
-  //     name: "amine",
-  //     price: "122",
-  //   },
-  //   {
-  //     id: 2,
-  //     image:
-  //       "https://c.animaapp.com/FOn2hBvi/img/547953-9c2st-8746-001-082-0000-light-gucci-savoy-medium-duffle-b@2x.png",
-  //     name: "amine",
-  //     price: "122",
-  //   },
-  //   {
-  //     id: 3,
-  //     image:
-  //       "https://c.animaapp.com/FOn2hBvi/img/547953-9c2st-8746-001-082-0000-light-gucci-savoy-medium-duffle-b@2x.png",
-  //     name: "amine",
-  //     price: "122",
-  //   },
-  //   {
-  //     id: 4,
-  //     image:
-  //       "https://c.animaapp.com/FOn2hBvi/img/547953-9c2st-8746-001-082-0000-light-gucci-savoy-medium-duffle-b@2x.png",
-  //     name: "amine",
-  //     price: "122",
-  //   },
-  // ];
+  const jwt = require("jsonwebtoken");
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const decodedToken = jwt.decode(token);
+  var idUser = 0;
+  if (decodedToken !== null) {
+    idUser = decodedToken.id;
+  }
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/wishList/getAllWishList")
+      .get(`http://localhost:5000/wishList/getAllWishList/${idUser}`)
       .then((result) => {
         setData(result.data);
+        console.log(result,"data");
       })
       .catch((error: any) => {
         console.log(error);
@@ -54,9 +36,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
       .get("http://localhost:5000/products/getAllProducts")
       .then((result) => {
         let newData = [...dataforyou];
-
         for (let i = 0; i < 4; i++) {
-          console.log(result.data[i]);
           newData = newData.concat(result.data[i]);
         }
         setDataforyou(newData);
@@ -87,7 +67,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
   };
   const add = (product: objectType) => {
     axios
-      .put(`http://localhost:5000/cart/add`, product)
+      .post(`http://localhost:5000/cart/createCart/${idUser}`, product)
       .then((result) => {
         console.log(result.data);
       })
@@ -103,7 +83,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
             Wishlist ({data.length})
           </div>
           <button
-            className="!flex-[0_0_auto] p-4 border-2 rounded w-[12rem] ml-[150px]"
+            className="!flex-[0_0_auto] p-4 border-2 rounded w-[12rem] ml-[130px] "
             onClick={() => {
               deleteAll();
             }}
@@ -135,13 +115,15 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                     </div>
                   </div>
                   <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px]">
+                    
                     <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
                       <div
                         className=" text-white"
                         onClick={() => {
+                          console.log(e,"product");
                           add(e);
                         }}
-                      >
+                       >
                         Add To Cart
                       </div>
                     </div>

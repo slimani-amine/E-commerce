@@ -49,7 +49,6 @@ route.post("/register", async (req, res) => {
 route.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
-
     if (!user) {
       return res.status(400).json({ message: "Email not found." });
     }
@@ -57,6 +56,7 @@ route.post("/login", async (req, res) => {
       req.body.password,
       user.password
     );
+    console.log(isPasswordValid);
     if (isPasswordValid) {
       const token = jwt.sign(
         {
@@ -110,13 +110,13 @@ route.put("/updateUser/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    const { firstName, lasstName, address, password, email } = req.body;
-
+    const { address, firstName, lasstName, email, password } = req.body;
     let updatedFields = {
+      address,
       firstName,
       lasstName,
-      address,
       email,
+      password,
     };
 
     if (password) {

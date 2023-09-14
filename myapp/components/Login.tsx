@@ -92,10 +92,12 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                     Log In
                   </p>
                 </button>
-
+                <Link href="/forgotpassword">
                 <p className="text-red-500 text-base font-normal leading-normal cursor-pointer">
                   Forget Password?
                 </p>
+                </Link>
+                
               </div>
               <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
                 <div className="relative w-fit opacity-70 [font-family:var(--title-16px-regular-font-family)] font-[number:var(--title-16px-regular-font-weight)] text-[color:var(--text-2)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap ">

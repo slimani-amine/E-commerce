@@ -17,7 +17,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       message: msg,
     };
     axios
-      .post("http://localhost:5000/contact/add", obj)
+      .post("http://localhost:5000/contact/createContact", obj)
       .then((result) => {
         alert("sended");
       })
@@ -77,7 +77,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
             }}
           ></textarea>
           <Link
-            href="/"
+            href="/dropdown"
             className="text-neutral-50 text-base font-medium leading-6"
           >
             <button
