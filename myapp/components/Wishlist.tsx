@@ -25,7 +25,6 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
       .get(`http://localhost:5000/wishList/getAllWishList/${idUser}`)
       .then((result) => {
         setData(result.data);
-        console.log(result,"data");
       })
       .catch((error: any) => {
         console.log(error);
@@ -69,7 +68,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
     axios
       .post(`http://localhost:5000/cart/createCart/${idUser}`, product)
       .then((result) => {
-        console.log(result.data);
+        location.reload()
       })
       .catch((error: any) => {
         console.log(error);
@@ -120,7 +119,6 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                       <div
                         className=" text-white"
                         onClick={() => {
-                          console.log(e,"product");
                           add(e);
                         }}
                        >
@@ -166,7 +164,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                       />
                     </div>
                   </div>
-                  <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px]">
+                  <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px] cursor-pointer	">
                     <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
                       <div
                         className=" text-white"

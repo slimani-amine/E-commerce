@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface AccountProps {
   override?: React.CSSProperties;
@@ -26,14 +27,20 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
   }
   const decodedToken = jwt.decode(token);
   var idUser = 0;
+
+  
   if (decodedToken !== null) {
     idUser = decodedToken.id;
+
   }
   useEffect(() => {
     axios
       .get(`http://localhost:5000/user/getUser/${idUser}`)
       .then((result) => {
         setUserName(result.data.lasstName);
+        setEmail(result.data.email)
+        setFname(result.data.firstName)
+        setLname(result.data.lasstName)
       })
       .catch((error) => {
         console.log(error);
@@ -45,9 +52,7 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
       const res = await axios.get(
         `http://localhost:5000/user/getUser/${idUser}`
       );
-      console.log(res.data);
       const isPasswordValid = await bcrypt.compare(oldpass, res.data.password);
-      console.log(isPasswordValid);
       if (!isPasswordValid) {
         setmsg("Old password is incorrect.");
         return false;
@@ -67,22 +72,19 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
     e.preventDefault();
     const canSave = await verif();
     if (canSave) {
-      const hashedNewpass = await bcrypt.hash(newpass, 10);
       const obj = {
         adresse: adresse,
         firstName: fname,
         lastName: lname,
         email: email,
-        password: hashedNewpass,
+        password: newpass,
       };
       try {
-        console.log(obj ,"obj");
         const res = await axios.put(
           `http://localhost:5000/user/updateUser/${idUser}`,
           obj
         );
         router.push("/dropdown");
-        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -112,22 +114,24 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
   };
   return (
     <div
-      className="relative w-full h-[900px]  bg-white font-[Poppins]"
+      className="relative w-full h-[700px]  bg-white font-[Poppins]"
       style={override}
     >
       <p className="absolute left-[1163px]  text-sm font-normal leading-[21px]">
         Welcome! {userName}
       </p>
-      <p className="absolute left-[135px] top-[123px] text-black text-base font-medium leading-6">
+      <p className="absolute left-[135px] top-[100px] text-black text-base font-medium leading-6">
         Manage My Account
       </p>
-      <p className="absolute left-[135px] top-[275px] text-black text-base font-medium leading-6">
+      <p className="absolute left-[135px] top-[250px] text-black text-base font-medium leading-6">
         My Orders
       </p>
-      <p className="absolute w-[93px] left-[135px] h-[23px] top-[387px] text-black text-base font-medium leading-6">
+      <Link href="/wishlist">
+      <p className="absolute w-[93px] left-[135px] h-[23px] top-[350px] text-black text-base font-medium leading-6">
         My WishList
       </p>
-      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[163px]">
+      </Link>
+      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[140px]">
         <a
           href="#"
           className="text-[rgb(219,_68,_68)] text-base font-normal leading-6"
@@ -147,7 +151,7 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
           My Payment Options
         </a>
       </div>
-      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[315px]">
+      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[280px]">
         <a
           href="#"
           className="opacity-50 text-black text-base font-normal leading-6"
@@ -162,7 +166,7 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
         </a>
       </div>
       <div
-        className="overflow-hidden rounded absolute w-[870px] left-[434px] h-[630px] top-[123px] bg-white"
+        className="overflow-hidden rounded absolute w-[870px] left-[434px] h-[500px] top-[100px] bg-white"
         style={{
           boxShadow: "0px 1px 13px rgba(0, 0, 0, 0.05)",
         }}
