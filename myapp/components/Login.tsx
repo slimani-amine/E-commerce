@@ -100,13 +100,10 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                 
               </div>
               <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
-                <div className="relative w-fit opacity-70 [font-family:var(--title-16px-regular-font-family)] font-[number:var(--title-16px-regular-font-weight)] text-[color:var(--text-2)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap ">
-                  Already have account?
-                </div>
                 <div className="opacity-70 text-black text-base font-medium leading-normal">
                   <Link
                     href="/signup"
-                    className="relative w-fit mt-[-1.00px]  [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-[color:var(--text-2)] text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap "
+                    className="relative w-fit mt-[-1.00px] [font-family:var(--title-16px-medium-font-family)] font-[number:var(--title-16px-medium-font-weight)] text-[color:var(--text-2)] text-[length:var(--title-16px-medium-font-size)] tracking-[var(--title-16px-medium-letter-spacing)] leading-[var(--title-16px-medium-line-height)] whitespace-nowrap "
                   >
                     Sign Up
                   </Link>

@@ -28,7 +28,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
 
   return (
     <div
-      className="relative w-full h-[800px] bg-white font-[Poppins] "
+      className="relative w-full h-[700px] bg-white font-[Poppins] "
       style={override}
     >
       <div className="absolute w-[800px] h-[457px] top-[023px] left-[504px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">

@@ -8,32 +8,29 @@ import { useRouter } from "next/router";
 export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
-  const [newUser, setNewUser] = useState({
-    firstName: "",
-    lasstName: "",
-    password: "",
-    email: "",
-  });
-
-  const handleChange = (input: any) => {
-    const { name, value } = input.target;
-    setNewUser((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    const newUser = {
+      firstName: firstName,
+      lasstName: lastName,
+      password: password,
+      email: email,
+    };
     axios
       .post("http://localhost:5000/user/register", newUser)
       .then((response) => {
         router.push("/logIn");
-        // window.location.reload();
         console.log("Successful add", response.data);
       })
-      .catch((error) => console.log("Failed to add", error));
-    setError("This email is already in use !");
+      .catch((error) => {
+        console.log("Failed to add", error);
+        setError("This email is already in use !");
+      });
   };
 
   return (
@@ -70,8 +67,10 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                         className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
                         placeholder="firstName"
                         name="firstName"
-                        value={newUser.firstName}
-                        onChange={handleChange}
+                        value={firstName}
+                        onChange={(e) => {
+                          setFirstName(e.target.value);
+                        }}
                       ></input>
                       <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                         <div className="w-[370px] h-[0px] border border-black"></div>
@@ -82,8 +81,10 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                         className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
                         placeholder="lastName"
                         name="lasstName"
-                        value={newUser.lasstName}
-                        onChange={handleChange}
+                        value={lastName}
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                        }}
                       ></input>
                       <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                         <div className="w-[370px] h-[0px] border border-black"></div>
@@ -95,8 +96,10 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                         className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
                         placeholder="Email "
                         name="email"
-                        value={newUser.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
                       ></input>
 
                       <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
@@ -112,7 +115,9 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                           className="opacity-80 text-black text-base font-normal leading-normal w-[370px] "
                           placeholder="Password"
                           type="password"
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                         ></input>
                         <div className="w-[370px] h-[0px] opacity-50 justify-center items-center inline-flex">
                           <div className="w-[560px] h-[0px] border border-black"></div>
@@ -125,16 +130,15 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                   </div>
                   <div className="gap-[16px] inline-flex flex-col items-start relative flex-[0_0_auto]">
                     <div className="gap-[16px] inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      
-                        <div
-                          className="w-[371px] h-14 px-[122px] py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"
-                          onClick={handleSubmit}
-                        >
-                          <button className="text-neutral-50 text-base font-medium leading-normal">
-                            Create Account
-                          </button>
-                        </div>
-                      
+                      <div
+                        className="w-[371px] h-14 px-[122px] py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"
+                        onClick={handleSubmit}
+                      >
+                        <button className="text-neutral-50 text-base font-medium leading-normal">
+                          Create Account
+                        </button>
+                      </div>
+
                       <div className="inline-flex flex-col items-center gap-[32px] relative flex-[0_0_auto]">
                         <div className="w-[371px] h-14 px-[86px] py-4 rounded border border-black border-opacity-40 flex-col justify-start items-start gap-2.5 inline-flex cursor-pointer">
                           <div className="justify-start items-start gap-4 inline-flex ">
