@@ -12,7 +12,8 @@ route.post("/createProducts", (req, res) => {
     images:req.body.images,
     colours:req.body.colours,
     size:req.body.size,
-    price:req.body.price
+    price:req.body.price,
+    discount:req.body.discount
 
  })
     .then((result) => {

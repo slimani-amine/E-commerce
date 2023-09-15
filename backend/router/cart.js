@@ -4,7 +4,7 @@ const route = express.Router();
 const db =require ("../models/index")
 
 
-route.post("/createCart:id", (req, res) => {
+route.post("/createCart/:userid", (req, res) => {
  db.Cart.create({
     name:req.body.name,
     description:req.body.description,
@@ -13,9 +13,8 @@ route.post("/createCart:id", (req, res) => {
     colours:req.body.colours,
     size:req.body.size,
     price:req.body.price,
-    quantity:req.body.quantity
-
- },{ where: { id: req.params.id } })
+    userid: req.params.userid,
+ })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -34,8 +33,8 @@ route.get("/getOneCart/:id", (req, res) => {
     });
 });
 
-route.get("/getAllCart", (req, res) => {
-  db.Cart.findAll()
+route.get("/getAllCart/:userid", (req, res) => {
+  db.Cart.findAll({ where: { userid: req.params.userid } })
     .then((result) => {
       res.status(200).json(result);
     })

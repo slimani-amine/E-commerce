@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 interface AccountProps {
   override?: React.CSSProperties;
   firstName: string;
-  id: string;
 }
 
-export const Account: React.FC<AccountProps> = ({
-  override,
-  firstName,
-  id
-}) => {
+export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -22,12 +18,42 @@ export const Account: React.FC<AccountProps> = ({
   const [newpass, setNewpass] = useState<string>("");
   const [cnewpass, setCnewpass] = useState<string>("");
   const [msg, setmsg] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const router = useRouter();
+  const jwt = require("jsonwebtoken");
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const decodedToken = jwt.decode(token);
+  var idUser = 0;
+
+  
+  if (decodedToken !== null) {
+    idUser = decodedToken.id;
+
+  }
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/user/getUser/${idUser}`)
+      .then((result) => {
+        setUserName(result.data.lasstName);
+        setEmail(result.data.email)
+        setFname(result.data.firstName)
+        setLname(result.data.lasstName)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const verif = async () => {
     try {
-      const hashedOldpass = await bcrypt.hash(oldpass, 10);
-      const res = await axios.get(`http://localhost:5000/user/getUser/${id}`);
-      if (res.data.password !== hashedOldpass) {
+      const res = await axios.get(
+        `http://localhost:5000/user/getUser/${idUser}`
+      );
+      const isPasswordValid = await bcrypt.compare(oldpass, res.data.password);
+      if (!isPasswordValid) {
         setmsg("Old password is incorrect.");
         return false;
       } else if (newpass !== cnewpass) {
@@ -46,20 +72,19 @@ export const Account: React.FC<AccountProps> = ({
     e.preventDefault();
     const canSave = await verif();
     if (canSave) {
-      const hashedNewpass = await bcrypt.hash(newpass, 10);
       const obj = {
         adresse: adresse,
         firstName: fname,
         lastName: lname,
         email: email,
-        password: hashedNewpass,
+        password: newpass,
       };
       try {
         const res = await axios.put(
-          `http://localhost:5000/user/updateUser/${id}`,
+          `http://localhost:5000/user/updateUser/${idUser}`,
           obj
         );
-        console.log(res);
+        router.push("/dropdown");
       } catch (error) {
         console.log(error);
       }
@@ -77,25 +102,36 @@ export const Account: React.FC<AccountProps> = ({
       setmsg("Something went wrong! Please try again.");
     }
   };
-
+  const cancel = () => {
+    setAdresse("");
+    setCnewpass("");
+    setEmail("");
+    setFname("");
+    setLname("");
+    setNewpass("");
+    setOldpass("");
+    setmsg("");
+  };
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins]"
+      className="relative w-full h-[700px]  bg-white font-[Poppins]"
       style={override}
     >
-      <p className="absolute left-[1163px] top-[222px] text-sm font-normal leading-[21px]">
-        Welcome! {firstName}
+      <p className="absolute left-[1163px]  text-sm font-normal leading-[21px]">
+        Welcome! {userName}
       </p>
-      <p className="absolute left-[135px] top-[323px] text-black text-base font-medium leading-6">
+      <p className="absolute left-[135px] top-[100px] text-black text-base font-medium leading-6">
         Manage My Account
       </p>
-      <p className="absolute left-[135px] top-[475px] text-black text-base font-medium leading-6">
+      <p className="absolute left-[135px] top-[250px] text-black text-base font-medium leading-6">
         My Orders
       </p>
-      <p className="absolute w-[93px] left-[135px] h-[23px] top-[587px] text-black text-base font-medium leading-6">
+      <Link href="/wishlist">
+      <p className="absolute w-[93px] left-[135px] h-[23px] top-[350px] text-black text-base font-medium leading-6">
         My WishList
       </p>
-      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[363px]">
+      </Link>
+      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[140px]">
         <a
           href="#"
           className="text-[rgb(219,_68,_68)] text-base font-normal leading-6"
@@ -115,7 +151,7 @@ export const Account: React.FC<AccountProps> = ({
           My Payment Options
         </a>
       </div>
-      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[515px]">
+      <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[280px]">
         <a
           href="#"
           className="opacity-50 text-black text-base font-normal leading-6"
@@ -130,7 +166,7 @@ export const Account: React.FC<AccountProps> = ({
         </a>
       </div>
       <div
-        className="overflow-hidden rounded absolute w-[870px] left-[434px] h-[630px] top-[323px] bg-white"
+        className="overflow-hidden rounded absolute w-[870px] left-[434px] h-[500px] top-[100px] bg-white"
         style={{
           boxShadow: "0px 1px 13px rgba(0, 0, 0, 0.05)",
         }}
@@ -140,9 +176,6 @@ export const Account: React.FC<AccountProps> = ({
         </p>
         <div className="flex items-start gap-[50px] absolute left-20 top-[84px]">
           <div className="flex flex-col items-start gap-2">
-            <p className="text-black text-base font-normal leading-6">
-              First Name
-            </p>
             <div className="flex">
               <input
                 placeholder="First Name"
@@ -204,13 +237,27 @@ export const Account: React.FC<AccountProps> = ({
               className="overflow-hidden rounded w-[720px] h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
               style={override}
             />
-            <button
-              onClick={handleSave}
-              className="flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium "
-              style={override}
-            >
-              Save changes
-            </button>
+            <p className=" text-[rgb(219,_68,_68)] text-xl font-medium">
+              {msg}
+            </p>
+            <div className="flex ml-[58%] text-center ">
+              <p
+                className="text-black  text-xl font-medium mr-5 mt-3"
+                onClick={() => {
+                  cancel();
+                }}
+              >
+                cancel
+              </p>
+              <br />
+              <button
+                onClick={handleSave}
+                className="mr-1 flex justify-center items-center px-12 py-4 rounded bg-[rgb(219,_68,_68)] text-neutral-50 text-base font-medium "
+                style={override}
+              >
+                Save changes
+              </button>
+            </div>
           </div>
         </div>
       </div>
