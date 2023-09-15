@@ -1,47 +1,19 @@
-// export const Cart = ({ override }: { override?: React.CSSProperties }) => {
-//   return (
-//     <div
-//       className="relative w-full h-[1533px] bg-white font-[Poppins] "
-//       style={override}
-//     >
-//       <div>Cart</div>
-//     </div>
-//   );
-// };
 export const Cart = ({ override }: { override?: React.CSSProperties }) => {
+  const jwt = require("jsonwebtoken");
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const decodedToken = jwt.decode(token);
+  var idUser = 0;
+  if (decodedToken !== null) {
+    idUser = decodedToken.id;
+  }
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins] "
+      className="relative w-full h-[900px] bg-white font-[Poppins] "
       style={override}
     >
-      {/* <TopHeader
-        override={{
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-        }}
-      /> */}
-      {/* <HeaderComponent
-        override={{
-          position: "absolute",
-          top: "88px",
-          left: "135px",
-        }}
-      />
-      <Line_3
-        override={{
-          position: "absolute",
-          top: "142px",
-          left: "0px",
-        }}
-      />
-      <Roadmap
-        override={{
-          position: "absolute",
-          top: "222px",
-          left: "135px",
-        }}
-      /> */}
 <div>
             <div className="ml-[180px] mt-[300px] w-[1650px] h-[60px] border-2 rounded">
               <h1 className="text-xl  mt-[13px] ml-[50px]">Products</h1>
@@ -57,14 +29,7 @@ export const Cart = ({ override }: { override?: React.CSSProperties }) => {
               </div>
             </div>
         </div>
-      {/* <Footer
-        override={{
-          position: "absolute",
-          top: "1093px",
-          left: "0px",
-        }}
-      />
-      <div>Cart</div> */}
+
     </div>
   );
 };

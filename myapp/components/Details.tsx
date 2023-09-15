@@ -1,13 +1,17 @@
-export const Details = ({ override }: { override?: React.CSSProperties }) => {
+import { useRouter } from "next/router";
+
+const Details = ({ override }: { override?: React.CSSProperties }) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins] "
+      className="relative w-full h-[1533px] bg-white font-[Poppins]"
       style={override}
     >
-<div>
-            Product details
-        </div>
-
+      <div>ID: {id}</div>
     </div>
   );
 };
+
+export default Details;

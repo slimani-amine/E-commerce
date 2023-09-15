@@ -1,114 +1,190 @@
 import axios from "axios";
+import Link from "next/link";
+import { IconDelete4 } from "../public/iconDelete4";
+import { QuickView6 } from "../public/QuikView6";
+
 import React, { useEffect, useState } from "react";
+import { objectType } from "@material-tailwind/react/types/components/checkbox";
 export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
   const [trigger, setTrigger] = useState(false);
-  const [dataa, setData] = useState([]);
-  // useEffect(()=>{
-  //   axios.get("http://localhost:5000/wishlist/getAll").then((result) => {
-  //     setData(result.data)
-  //   }).catch((error: any) => {
-  //     console.log(error);
-  //   });
-  // },[trigger])
+  const [data, setData] = useState([]);
+  const [dataforyou, setDataforyou] = useState([]);
+  const jwt = require("jsonwebtoken");
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const decodedToken = jwt.decode(token);
+  var idUser = 0;
+  if (decodedToken !== null) {
+    idUser = decodedToken.id;
+  }
 
-  var data = [
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },    {
-      images: "https://i.ibb.co/44vJTd4/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-3.png",
-      name: "hhh",
-      price: "19",
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/wishList/getAllWishList/${idUser}`)
+      .then((result) => {
+        setData(result.data);
+        console.log(result,"data");
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }, [trigger]);
+  useEffect(()=>{
+    axios
+      .get("http://localhost:5000/products/getAllProducts")
+      .then((result) => {
+        let newData = [...dataforyou];
+        for (let i = 0; i < 4; i++) {
+          newData = newData.concat(result.data[i]);
+        }
+        setDataforyou(newData);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  },[])
+  const deleteItem = (id: any) => {
+    axios
+      .delete(`http://localhost:5000/wishlist/deleteOneWishList/${id}`)
+      .then((result) => {
+        setTrigger(!trigger);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+  const deleteAll = () => {
+    axios
+      .delete(`http://localhost:5000/wishList/deleteAllWishList`)
+      .then((result) => {
+        setTrigger(!trigger);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+  const add = (product: objectType) => {
+    axios
+      .post(`http://localhost:5000/cart/createCart/${idUser}`, product)
+      .then((result) => {
+        console.log(result.data);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
   return (
-    
-    <div
-      className="mt-150 relative w-full h-[1533px] bg-white font-[Poppins] "
-      style={override}
-    >
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <div className="py-12">
-        <div className="hidden sm:flex flex-col justify-start items-start">
-          <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
-            <h1 className="text-4xl font-semibold leading-9 text-gray-800  dark:text-white">
-              Favourites
-            </h1>
-            <p className="text-base leading-4 text-gray-600 dark:text-white pb-1">
-              (12 Items)
-            </p>
+    <div className="inline-flex flex-col items-start gap-[80px] relative ml-[120px]">
+      <div className="inline-flex flex-col items-start gap-[60px] relative flex-[0_0_auto]">
+        <div className="inline-flex items-center gap-[835px] relative flex-[0_0_auto]">
+          <div className="relative w-fit [font-family:var(--title-20px-regular-font-family)] font-[number:var(--title-20px-regular-font-weight)] text-black text-[length:var(--title-20px-regular-font-size)] text-center tracking-[var(--title-20px-regular-letter-spacing)] leading-[var(--title-20px-regular-line-height)] whitespace-nowrap ">
+            Wishlist ({data.length})
           </div>
-          <table className="w-full mt-16 whitespace-nowrap">
-            <thead
-              aria-label="table heading"
-              className="w-full h-16 text-left py-6 bg-gray-50 border-gray-200 dark:bg-gray-800 border-b"
-            >
-              <tr>
-                <th className="text-base font-medium leading-4 text-gray-600 dark:text-white 2xl:pl-20 pl-4 lg:pl-10">
-                  YOUR PRODUCT
-                </th>
-                <th className="text-base font-medium leading-4 text-gray-600 dark:text-white pl-6 lg:pl-20 2xl:pl-52">
-                  DESCRIPTION
-                </th>
-                <th className="text-base font-medium leading-4 text-gray-600 dark:text-white pl-6 lg:pl-20 2xl:pl-52">
-                  PRICE
-                </th>
-                <th className="text-base font-medium leading-4 text-gray-600 dark:text-white pl-6 lg:pl-20 2xl:pl-52">
-                  MORE OPTIONS
-                </th>
-                <th className="text-base font-medium leading-4 text-gray-600 dark:text-white 2xl:pl-28 2xl:pr-20 pr-4 lg:pr-10"></th>
-              </tr>
-            </thead>
-            <tbody className="w-full text-left">
-              {data &&
-                data.map((e) => {
-                  return (
-                    <tr className="border-gray-200 border-b">
-                      <th>
-                        <img
-                          className="my-10 pl-4 lg:pl-10 2xl:pl-20"
-                          src={e.images}
-                          alt="shoe"
-                        />
-                      </th>
-                      <th className="mt-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
-                        <p className="text-base leading-4 text-gray-800 dark:text-white">
-                          {e.name}
-                        </p>
-                      </th>
-                      <th className="my-10 pl-6 lg:pl-20 2xl:pl-52">
-                        <p className="dark:text-white">{e.price}</p>
-                      </th>
-                      <th className="my-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
-                        <button className="hover:underline text-base font-medium leading-none text-gray-800 dark:text-white focus:outline-none focus:underline">
-                          View details
-                        </button>
-                      </th>
-                      <th className="my-10 pl-4 lg:pl-12 2xl:pl-28 pr-4 2xl:pr-20">
-                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800">
-                          <p>Remove Item</p>
-                        </button>
-                      </th>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          <button
+            className="!flex-[0_0_auto] p-4 border-2 rounded w-[12rem] ml-[130px] "
+            onClick={() => {
+              deleteAll();
+            }}
+          >
+            Move All To Bag
+          </button>
+        </div>
+
+        <div className="flex flex-wrap  gap-[30px] ml-[35px] ">
+          {data &&
+            data.map((e) => {
+              return (
+                <div className="relative w-[270px] h-[300px] bg-[color:var(--secondary)] rounded-[4px] overflow-hidden">
+                  <div className=" w-[246px] h-[183px] ">
+                    <div
+                      className="inline-flex cursor-pointer flex-col items-start gap-[8px] absolute top-0 left-[212px]"
+                      onClick={() => {
+                        deleteItem(e.id);
+                      }}
+                    >
+                      <IconDelete4 className="!absolute !w-[24px] !h-[24px] !top-[0px] !left-[35px]" />
+                    </div>
+                    <div className=" w-[190px] h-[180px] ">
+                      <img
+                        className=" w-[178px] h-[129px] ml-[60px] "
+                        alt="Element"
+                        src={e.images}
+                      />
+                    </div>
+                  </div>
+                  <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px]">
+                    
+                    <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
+                      <div
+                        className=" text-white"
+                        onClick={() => {
+                          console.log(e,"product");
+                          add(e);
+                        }}
+                       >
+                        Add To Cart
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-black">{e.name}</p>
+                    <p className="text-red-500">{e.price}</p>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        <div className="inline-flex items-center gap-[835px] relative flex-[0_0_auto]">
+          <div className="relative w-fit [font-family:var(--title-20px-regular-font-family)] font-[number:var(--title-20px-regular-font-weight)] text-black text-[length:var(--title-20px-regular-font-size)] text-center tracking-[var(--title-20px-regular-letter-spacing)] leading-[var(--title-20px-regular-line-height)] whitespace-nowrap  border-l-8 pl-2 border-red-500">
+            Just For You 
+          </div>
+          <Link href="/dropdown">
+            <button className="!flex-[0_0_auto] p-4 border-2 rounded w-[12rem] ml-[100px]">
+              See All
+            </button>
+          </Link>
+        </div>
+        <div className="flex flex-wrap  gap-[30px] ml-[35px] ">
+          {dataforyou &&
+            dataforyou.map((e) => {
+              return (
+                <div className="relative w-[270px] h-[550px] bg-[color:var(--secondary)] rounded-[4px] overflow-hidden">
+                  <div className=" w-[246px] h-[183px] ">
+                    <div className="inline-flex flex-col items-start gap-[8px] absolute top-0 left-[212px]">
+                      <Link href={`/details?id=${e.id}`}>
+                        <QuickView6 className="!absolute !w-[24px] !h-[24px] !top-[0px] !left-[35px]" />
+                      </Link>
+                    </div>
+
+                    <div className=" w-[190px] h-[180px] ">
+                      <img
+                        className=" w-[178px] h-[129px] ml-[60px] "
+                        alt="Element"
+                        src={e.images}
+                      />
+                    </div>
+                  </div>
+                  <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px]">
+                    <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
+                      <div
+                        className=" text-white"
+                        onClick={() => {
+                          add(e);
+                        }}
+                      >
+                        Add To Cart
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-black">{e.name}</p>
+                    <p className="text-red-500">{e.price}</p>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

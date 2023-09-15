@@ -1,125 +1,127 @@
-const expresss = require("express")
-const app= expresss()
-const db=require("./models")
-const userRoutes = require("./router/user-router")
-const productsRoutes = require("./router/products")
-const wishListRoutes = require("./router/wishList")
-const reviewRoutes = require("./router/review-router")
-const contactRoutes = require("./router/contact")
-const cartRoutes = require("./router/cart")
+const expresss = require("express");
+const app = expresss();
+const jwt = require("jsonwebtoken");
+const db = require("./models");
+const userRoutes = require("./router/user-router");
+const productsRoutes = require("./router/products");
+const wishListRoutes = require("./router/wishList");
+const reviewRoutes = require("./router/review-router");
+const contactRoutes = require("./router/contact");
+const cartRoutes = require("./router/cart");
 
-
-const cors = require("cors")
-const bcrypt = require('bcrypt');
+const cors = require("cors");
+const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const { google } = require('googleapis');
-app.use(cors())
-app.use(expresss.json())
-app.use(expresss.urlencoded({extended:true}))
+app.use(cors());
+app.use(expresss.json());
+app.use(expresss.urlencoded({ extended: true }));
 
+app.use("/user", userRoutes);
+app.use("/contact", contactRoutes);
+app.use("/cart", cartRoutes);
+app.use("/products", productsRoutes);
+app.use("/wishList", wishListRoutes);
+app.use("/review", reviewRoutes);
 
-app.use("/user",userRoutes)
-app.use("/contact",contactRoutes)
-app.use("/cart",cartRoutes)
-app.use("/products",productsRoutes)
-app.use("/wishList",wishListRoutes)
-app.use("/review",reviewRoutes)
+// Function to generate a unique token
+function generateUniqueToken() {
+  const tokenLength = 32;
+  const characters =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let token = "";
 
-// const OAuth2 = google.auth.OAuth2;
-// const CLIENT_ID = "958591364059-alfknordls9km64k7d3c1qtqrt7g97si.apps.googleusercontent.com"
-// const CLIENT_SECRET = "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";
-// const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-// const REFRESH_TOKEN = "1//04J2LRK0ybW_nCgYIARAAGAQSNwF-L9IreVxyuyfjX1hG8Or7lQXnBP7-3kf5Wh1xCqQcSFtVCysHAMDi0vdyqWnjLyVi1GgI3wI";
+  for (let i = 0; i < tokenLength; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    token += characters.charAt(randomIndex);
+  }
 
-// const oAuth2Client = new OAuth2(
-//   CLIENT_ID,
-//   CLIENT_SECRET,
-//   REDIRECT_URI
-// );
-// oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+  return token;
+}
 
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     type: "OAuth2",
-//     user: "haydercharfeddin51@gmail.com",
-//     clientId: CLIENT_ID,
-//     clientSecret: CLIENT_SECRET,
-//     refreshToken: REFRESH_TOKEN,
-//     accessToken: oAuth2Client.getAccessToken(),
-//   },
-// });
-// const verificationCodeMap = new Map();
+// Mock functions for database operations
+async function saveTokenToUser(email, token) {
+  // Implement the logic to save the token to the user's record in the database
+  // This is a mock implementation for demonstration purposes
+  console.log(`Token saved for user with email: ${email}`);
+}
 
-// app.post("/forget-password-email", async (req, res) => {
-//   const { email } = req.body;
+async function getUserByToken(token) {
+  // Implement the logic to retrieve a user by the token from the database
+  // This is a mock implementation for demonstration purposes
+  if (token === "validToken") {
+    return { id: "userId" };
+  }
+  return null;
+}
 
+async function updateUserPassword(userId, hashedPassword) {
+  // Implement the logic to update the user's password in the database
+  // This is a mock implementation for demonstration purposes
+  console.log(`Password updated for user with ID: ${userId}`);
+}
 
-//   getAll((err, users) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
+async function invalidateToken(token) {
+  // Implement the logic to invalidate the token (e.g., remove it from the database)
+  // This is a mock implementation for demonstration purposes
+  console.log(`Token invalidated: ${token}`);
+}
 
-//       const user = users.find((user) => user.user_email === email);
-//       if (!user) {
-//         res.status(400).send("Email not found");
-//         return;
-//       }
+app.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
 
-      
-//       const verificationCode = Math.floor(100000 + Math.random() * 900000);
-//       const mailOptions = {
-//         from: "haydercharfeddin51@gmail.com",
-//         to: email,
-//         subject: "Reset Password Code",
-//         text: `Your reset password code is ${verificationCode}`,
-//       };
+  // Generate a unique token and save it to the user's record in the database
+  const token = generateUniqueToken();
+  await saveTokenToUser(email, token);
 
-//       transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//           console.log(error);
-//           res.status(500).send("Could not send email");
-//         } else {
-//           console.log("Email sent: " + info.response);
-//           res.status(200).send("Email sent successfully");
-//           verificationCodeMap.set(email, verificationCode);
-//           console.log("Verification code for", email, "is", verificationCode);
-//         }
-//       });
-//     }
-//   });
-// });
-// app.post("/verify-code", (req, res) => {
-//     const { email, code } = req.body;
-//     console.log("email:", email);
-//     console.log("code:", code);
-//     const verificationCode = verificationCodeMap.get(email);
-//     console.log("verificationCode:", verificationCode);
-//     if (verificationCode == code) {
-//       res.status(200).send("Code verified successfully");
-//     } else {
-//       res.status(400).send("Invalid code");
-//     }
-//   });
+  // Create a URL with the token and send it in an email
+  const resetLink = `http://localhost:3000/resetpassword/${token}`;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "slimaniamin76@gmail.com",
+      pass: "a.m.i.n.e",
+    },
+  });
+  const mailOptions = {
+    from: "slimaniamin76@gmail.com",
+    to: email,
+    subject: "Password Reset",
+    text: `Click the following link to reset your password: ${resetLink}`,
+  };
 
-//   app.put('/change-password', (req, res) => {
-//     const { email, password } = req.body
-//     const salt = bcrypt.genSaltSync(10)
-//     const hash = bcrypt.hashSync(password, salt)
-  
-//     const sql = 'UPDATE Users SET user_password = ? WHERE user_email = ?'
-  
-//     connection.query(sql, [hash, email], (err, result) => {
-//       if (err) {
-//         console.error(err)
-//         res.status(500).send('Could not update password');
-//       } else if (result.affectedRows === 0) {
-//         res.status(404).send('User not found')
-//       } else {
-//         res.send('Password updated successfully')
-//       }
-//     });
-//   });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: "Failed to send reset email" });
+    } else {
+      console.log("Password reset email sent: " + info.response);
+      res.status(200).json({ message: "Password reset email sent" });
+    }
+  });
+});
 
+app.post("/reset-password/:token", async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
 
- app.listen(5000,()=>console.log("server  listend"))
+  // Verify the token
+  const user = await getUserByToken(token);
+  if (!user || tokenIsExpired(token)) {
+    return res.status(400).json({ error: "Invalid or expired token" });
+  }
+
+  // Hash the new password and update the user's password in the database
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  await updateUserPassword(user.id, hashedPassword);
+
+  // Invalidate the token
+  await invalidateToken(token);
+
+  res.status(200).json({ message: "Password reset successful" });
+});
+
+// Start the Express server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

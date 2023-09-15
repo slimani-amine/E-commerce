@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 
 export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
   const router = useRouter();
-
   const [error, setError] = useState<string>("");
   const [newUser, setNewUser] = useState({
     firstName: "",
@@ -29,8 +28,8 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
     axios
       .post("http://localhost:5000/user/register", newUser)
       .then((response) => {
-        router.push("/login");
-        // window.location.reload(false);
+        router.push("/logIn");
+        // window.location.reload();
         console.log("Successful add", response.data);
       })
       .catch((error) => console.log("Failed to add", error));
@@ -39,14 +38,14 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
 
   return (
     <div
-      className="relative w-full h-[1533px] bg-white font-[Poppins] "
+      className="relative w-full h-[1000px] bg-white font-[Poppins] "
       style={override}
     >
       <div>
         <div className="bg-white flex flex-row justify-center w-full">
           <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
             <Line className="!absolute !left-0 !top-[140px]" />
-            <div className="inline-flex items-center gap-[129px] absolute top-[200px] left-0">
+            <div className="inline-flex items-center gap-[129px] absolute top-[100px] left-0">
               <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
                 <img
                   className="absolute w-[805px] h-[706px] top-[75px] left-0"
@@ -126,21 +125,25 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
                   </div>
                   <div className="gap-[16px] inline-flex flex-col items-start relative flex-[0_0_auto]">
                     <div className="gap-[16px] inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div
-                        className="w-[371px] h-14 px-[122px] py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"
-                        onClick={handleSubmit}
-                      >
-                        <button className="text-neutral-50 text-base font-medium leading-normal">
-                          Create Account
-                        </button>
-                      </div>
+                      
+                        <div
+                          className="w-[371px] h-14 px-[122px] py-4 bg-red-500 rounded justify-center items-center gap-2.5 inline-flex cursor-pointer"
+                          onClick={handleSubmit}
+                        >
+                          <button className="text-neutral-50 text-base font-medium leading-normal">
+                            Create Account
+                          </button>
+                        </div>
+                      
                       <div className="inline-flex flex-col items-center gap-[32px] relative flex-[0_0_auto]">
                         <div className="w-[371px] h-14 px-[86px] py-4 rounded border border-black border-opacity-40 flex-col justify-start items-start gap-2.5 inline-flex cursor-pointer">
                           <div className="justify-start items-start gap-4 inline-flex ">
                             <IconGoogle2 className="!relative !w-[24px] !h-[24px]" />
-                            <div className="text-black text-base font-normal leading-normal w-[371px] ">
-                              Sign up with Google
-                            </div>
+                            <Link href="/auth/google">
+                              <div className="text-black text-base font-normal leading-normal w-[371px] ">
+                                Sign up with Google
+                              </div>
+                            </Link>
                           </div>
                         </div>
                         <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
