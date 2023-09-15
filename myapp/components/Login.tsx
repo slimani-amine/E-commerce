@@ -113,13 +113,7 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
           </div>
         </div>
       </div>
-      <Footer
-        override={{
-          position: "absolute",
-          top: "1093px",
-          left: "25px",
-        }}
-      />
+
     </div>
   );
 };

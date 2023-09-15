@@ -4,7 +4,7 @@ const route = express.Router();
 const db =require ("../models/index")
 
 
-route.post("/createCart", (req, res) => {
+route.post("/createCart:id", (req, res) => {
  db.Cart.create({
     name:req.body.name,
     description:req.body.description,
@@ -12,9 +12,10 @@ route.post("/createCart", (req, res) => {
     images:req.body.images,
     colours:req.body.colours,
     size:req.body.size,
-    price:req.body.price
+    price:req.body.price,
+    quantity:req.body.quantity
 
- })
+ },{ where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json(result);
     })

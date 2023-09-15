@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      quantity: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       userid: {
         type: DataTypes.INTEGER,
         foreignKey: true,
