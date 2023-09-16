@@ -14,7 +14,6 @@ route.post("/createProducts", (req, res) => {
     size:req.body.size,
     price:req.body.price,
     discount:req.body.discount
-
  })
     .then((result) => {
       res.status(200).json(result);

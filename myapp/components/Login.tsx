@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "../public/line";
 import { useRouter } from "next/router";
-
+import { Tostify } from "../public/Tostify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import Link from "next/link";
 
@@ -21,7 +22,10 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        router.push("/dropdown");
+        toast.success("🎉 Login successful! Welcome back! 🎉");
+        setTimeout(() => {
+          router.push("/dropdown");
+        }, 2000);
       } else {
         throw new Error("Invalid email or password");
       }
@@ -35,6 +39,8 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-[color:var(--bg)] w-[1440px] h-[1000px] relative">
           <Line className="!absolute !left-0 !top-[10px]" />
+          <Tostify />
+
           <div className="inline-flex items-center gap-[129px] absolute top-[50px] left-0">
             <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
               <img
@@ -93,11 +99,10 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
                   </p>
                 </button>
                 <Link href="/forgotpassword">
-                <p className="text-red-500 text-base font-normal leading-normal cursor-pointer">
-                  Forget Password?
-                </p>
+                  <p className="text-red-500 text-base font-normal leading-normal cursor-pointer">
+                    Forget Password?
+                  </p>
                 </Link>
-                
               </div>
               <div className="inline-flex items-center gap-[16px] relative flex-[0_0_auto]">
                 <div className="opacity-70 text-black text-base font-medium leading-normal">
@@ -116,7 +121,6 @@ export const Login = ({ override }: { override?: React.CSSProperties }) => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

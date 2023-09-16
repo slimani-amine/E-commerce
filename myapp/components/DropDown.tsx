@@ -15,9 +15,9 @@ export const Dropdown = ({ override }: { override?: React.CSSProperties }) => {
         setData(res.data);
         setSellinData(
           res.data.filter((e) => {
-            return e.solde > 0;
+            return e.solde >0;
           })
-        );
+        )
       })
       .catch((error) => {
         console.log(error);
@@ -1850,3 +1850,5 @@ export const Dropdown = ({ override }: { override?: React.CSSProperties }) => {
     </div>
   );
 };
+
+

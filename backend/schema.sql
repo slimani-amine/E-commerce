@@ -92,22 +92,25 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`products` (
   `name` VARCHAR(255) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `category` VARCHAR(255) NOT NULL,
-  `images` VARCHAR(255) NOT NULL,
-  `colours` VARCHAR(255) NULL DEFAULT NULL,
-  `size` VARCHAR(255) NULL DEFAULT NULL,
-  `price` VARCHAR(255) NOT NULL,
-  `userid` INT NULL DEFAULT NULL,
+  `images` TEXT NOT NULL, -- storing array as JSON string
+  `colours` TEXT, -- storing array as JSON string
+  `size` TEXT, -- storing array as JSON string
+  `price` VARCHAR(255) NOT NULL, 
+  `discount` VARCHAR(255) NOT NULL,
+  `userid` INT,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `userid` (`userid` ASC) VISIBLE,
+  INDEX `idx_userid` (`userid` ASC),
   CONSTRAINT `products_ibfk_1`
     FOREIGN KEY (`userid`)
-    REFERENCES `ecommerce`.`users` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 18
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    REFERENCES `ecommerce`.`users` (`id`)
+    ON DELETE CASCADE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 18
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
 
 
 -- -----------------------------------------------------

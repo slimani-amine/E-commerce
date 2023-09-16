@@ -29,14 +29,10 @@ export const HeaderComponent = ({}: {}) => {
     console.log("Token is not open/invalid.");
   }
   const decodedToken = jwt.decode(token);
-  console.log(decodedToken);
-
   var idUser = "0";
   if (decodedToken !== null) {
     idUser = decodedToken.id;
   }
-  console.log(idUser, "id");
-
   return (
     <div className="flex flex-wrap items-center justify-between px-4 py-2 md:gap-[148px] mt-5">
       <div className="flex flex-wrap items-start md:gap-40 ml-10 ">

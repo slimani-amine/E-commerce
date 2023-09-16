@@ -4,7 +4,8 @@ import { IconGoogle2 } from "../public/iconGoogle2";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { Tostify } from "../public/Tostify";
+import { toast } from "react-toastify";
 export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
@@ -24,8 +25,10 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
     axios
       .post("http://localhost:5000/user/register", newUser)
       .then((response) => {
-        router.push("/logIn");
-        console.log("Successful add", response.data);
+        toast.success("🚀 Registration successful! Welcome aboard! 🚀");
+        setTimeout(() => {
+          router.push("/logIn");
+        }, 2000);
       })
       .catch((error) => {
         console.log("Failed to add", error);

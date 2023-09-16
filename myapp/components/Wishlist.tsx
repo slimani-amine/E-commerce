@@ -5,7 +5,7 @@ import { QuickView6 } from "../public/QuikView6";
 
 import React, { useEffect, useState } from "react";
 import { objectType } from "@material-tailwind/react/types/components/checkbox";
-export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
+export const Wishlist = () => {
   const [trigger, setTrigger] = useState(false);
   const [data, setData] = useState([]);
   const [dataforyou, setDataforyou] = useState([]);
@@ -34,11 +34,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
     axios
       .get("http://localhost:5000/products/getAllProducts")
       .then((result) => {
-        let newData = [...dataforyou];
-        for (let i = 0; i < 4; i++) {
-          newData = newData.concat(result.data[i]);
-        }
-        setDataforyou(newData);
+        setDataforyou(result.data);
       })
       .catch((error: any) => {
         console.log(error);
@@ -109,7 +105,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                       <img
                         className=" w-[178px] h-[129px] ml-[60px] "
                         alt="Element"
-                        src={e.images}
+                        src={JSON.parse(e.images)[0]}
                       />
                     </div>
                   </div>
@@ -146,7 +142,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
         </div>
         <div className="flex flex-wrap  gap-[30px] ml-[35px] ">
           {dataforyou &&
-            dataforyou.map((e) => {
+            dataforyou.slice(0, 4).map((e) => {
               return (
                 <div className="relative w-[270px] h-[550px] bg-[color:var(--secondary)] rounded-[4px] overflow-hidden">
                   <div className=" w-[246px] h-[183px] ">
@@ -160,7 +156,7 @@ export const Wishlist = ({ override }: { override?: React.CSSProperties }) => {
                       <img
                         className=" w-[178px] h-[129px] ml-[60px] "
                         alt="Element"
-                        src={e.images}
+                        src={JSON.parse(e.images)[0]}
                       />
                     </div>
                   </div>

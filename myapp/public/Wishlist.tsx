@@ -15,8 +15,6 @@ export const Wishlist: React.FC<WishlistProps> = ({
 }: WishlistProps) => {
   const [trigger, setTrigger] = useState<boolean>(false);
   const [wish, setWish] = useState<number>(0); 
-console.log(iduser,"wish");
-
   useEffect(() => {
     const fetchWishlist = async () => {
       try {

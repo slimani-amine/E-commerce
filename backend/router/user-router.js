@@ -56,7 +56,7 @@ route.post("/login", async (req, res) => {
       req.body.password,
       user.password
     );
-    console.log(isPasswordValid);
+
     if (isPasswordValid) {
       const token = jwt.sign(
         {
