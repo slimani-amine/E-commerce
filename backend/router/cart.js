@@ -13,6 +13,7 @@ route.post("/createCart/:userid", (req, res) => {
     colours:req.body.colours,
     size:req.body.size,
     price:req.body.price,
+    discount:req.body.discount,
     userid: req.params.userid,
  })
     .then((result) => {

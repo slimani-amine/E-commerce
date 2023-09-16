@@ -12,6 +12,7 @@ route.post("/createWishList", (req, res) => {
     colours: req.body.colours,
     size: req.body.size,
     price: req.body.price,
+    discount:req.body.discount,
     userid: req.body.userid,
   })
     .then((result) => {
