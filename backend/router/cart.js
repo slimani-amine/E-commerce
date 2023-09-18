@@ -3,8 +3,8 @@ const route = express.Router();
 // const { db, bussiness } = require('../models/index.js');
 const db = require("../models/index");
 
-route.post("/createCart", (req, res) => {
-  console.log(req.body, "body");
+
+route.post("/createCart/:userid", (req, res) => {
   db.Cart.create({
     name: req.body.name,
     description: req.body.description,
@@ -13,16 +13,19 @@ route.post("/createCart", (req, res) => {
     colours: req.body.colours,
     size: req.body.size,
     price: req.body.price,
+    discount: req.body.discount,
     quantity: req.body.quantity,
-    userid: req.body.userid
+    userid: parseInt(req.params.userid, 10)
   })
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
+  .then((result) => {
+    res.status(200).json(result);
+  })
+  .catch((err) => {
+    console.error("Error creating cart:", err); 
+    res.status(500).json(err);
+  });
 });
+
 
 route.get("/getOneCart/:id", (req, res) => {
   db.Cart.findOne({ where: { id: req.params.id } })

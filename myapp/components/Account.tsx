@@ -3,7 +3,8 @@ import axios from "axios";
 import bcrypt from "bcryptjs";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
+import { Tostify } from "../public/Tostify";
+import { toast } from "react-toastify";
 interface AccountProps {
   override?: React.CSSProperties;
   firstName: string;
@@ -28,19 +29,17 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
   const decodedToken = jwt.decode(token);
   var idUser = 0;
 
-  
   if (decodedToken !== null) {
     idUser = decodedToken.id;
-
   }
   useEffect(() => {
     axios
       .get(`http://localhost:5000/user/getUser/${idUser}`)
       .then((result) => {
         setUserName(result.data.lasstName);
-        setEmail(result.data.email)
-        setFname(result.data.firstName)
-        setLname(result.data.lasstName)
+        setEmail(result.data.email);
+        setFname(result.data.firstName);
+        setLname(result.data.lasstName);
       })
       .catch((error) => {
         console.log(error);
@@ -84,7 +83,10 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
           `http://localhost:5000/user/updateUser/${idUser}`,
           obj
         );
-        router.push("/dropdown");
+        toast.success("Great news! Your account has been updated successfully 😊😊");
+        setTimeout(() => {
+          router.push("/dropdown");
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
@@ -117,6 +119,7 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
       className="relative w-full h-[700px]  bg-white font-[Poppins]"
       style={override}
     >
+      <Tostify />
       <p className="absolute left-[1163px]  text-sm font-normal leading-[21px]">
         Welcome! {userName}
       </p>
@@ -127,9 +130,9 @@ export const Account: React.FC<AccountProps> = ({ override, firstName }) => {
         My Orders
       </p>
       <Link href="/wishlist">
-      <p className="absolute w-[93px] left-[135px] h-[23px] top-[350px] text-black text-base font-medium leading-6">
-        My WishList
-      </p>
+        <p className="absolute w-[93px] left-[135px] h-[23px] top-[350px] text-black text-base font-medium leading-6">
+          My WishList
+        </p>
       </Link>
       <div className="flex flex-col items-start gap-2 absolute left-[170px] top-[140px]">
         <a

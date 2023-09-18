@@ -38,16 +38,13 @@ function generateUniqueToken() {
   return token;
 }
 
-// Mock functions for database operations
 async function saveTokenToUser(email, token) {
-  // Implement the logic to save the token to the user's record in the database
-  // This is a mock implementation for demonstration purposes
+
   console.log(`Token saved for user with email: ${email}`);
 }
 
 async function getUserByToken(token) {
-  // Implement the logic to retrieve a user by the token from the database
-  // This is a mock implementation for demonstration purposes
+
   if (token === "validToken") {
     return { id: "userId" };
   }
@@ -55,25 +52,21 @@ async function getUserByToken(token) {
 }
 
 async function updateUserPassword(userId, hashedPassword) {
-  // Implement the logic to update the user's password in the database
-  // This is a mock implementation for demonstration purposes
+
   console.log(`Password updated for user with ID: ${userId}`);
 }
 
 async function invalidateToken(token) {
-  // Implement the logic to invalidate the token (e.g., remove it from the database)
-  // This is a mock implementation for demonstration purposes
+
   console.log(`Token invalidated: ${token}`);
 }
 
 app.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
 
-  // Generate a unique token and save it to the user's record in the database
   const token = generateUniqueToken();
   await saveTokenToUser(email, token);
 
-  // Create a URL with the token and send it in an email
   const resetLink = `http://localhost:3000/resetpassword/${token}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",

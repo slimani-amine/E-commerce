@@ -2,12 +2,17 @@ import { UnderLine } from "./UnderLine";
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
+import { Tostify } from "../public/Tostify";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export const Contact = ({ override }: { override?: React.CSSProperties }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setphone] = useState<string>("");
   const [msg, setmsg] = useState<string>("");
+  const [err, seterr] = useState<string>("");
+  const router = useRouter();
   const send = (e: any) => {
     e.preventDefault();
     var obj = {
@@ -16,14 +21,29 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       phone: phone,
       message: msg,
     };
-    axios
-      .post("http://localhost:5000/contact/createContact", obj)
-      .then((result) => {
-        alert("sended");
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+    const missingFields = [];
+    if (!obj.name) missingFields.push("name");
+    if (!obj.email) missingFields.push("email");
+    if (!obj.message) missingFields.push("message");
+    if (missingFields.length > 0) {
+      const fieldsString = missingFields.join(", ");
+      seterr(`Please complete the following fields: ${fieldsString}.`);
+    } else {
+      seterr("");
+      axios
+        .post("http://localhost:5000/contact/createContact", obj)
+        .then((result) => {
+          toast.success(
+            "Thank you for connecting with us! We'll be in touch soon. Please keep an eye on your email 😉"
+          );
+          setTimeout(() => {
+            router.push("/dropdown");
+          }, 3000);
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -34,11 +54,12 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
       <div className="absolute w-[800px] h-[457px] top-[023px] left-[504px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
         <div className="inline-flex flex-col items-end gap-[32px] relative top-[40px] left-[31px]">
           <div className="inline-flex items-start gap-[16px] relative flex-[0_0_auto]">
+            <Tostify />
             <div className="relative w-[235px] h-[50px] bg-neutral-100 rounded-[4px]">
               <input
-                placeholder="Your Name"
+                placeholder="Your Name *"
                 type="text"
-                className="overflow-hidden rounded h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                className="overflow-hidden rounded h-[50px] w-[100%] bg-neutral-100 text-gray-900 focus:text-black-600"
                 style={override}
                 onChange={(e) => {
                   setName(e.target.value);
@@ -47,9 +68,9 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
             </div>
             <div className="relative w-[235px] h-[50px] bg-neutral-100 rounded-[4px]">
               <input
-                placeholder="Your Email"
+                placeholder="Your Email *"
                 type="email"
-                className="overflow-hidden rounded h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                className="overflow-hidden rounded h-[50px] w-[100%] bg-neutral-100 text-gray-900 focus:text-black-600"
                 style={override}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -60,7 +81,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
               <input
                 placeholder="Your Phone"
                 type="text"
-                className="overflow-hidden rounded h-[50px] bg-neutral-100 text-gray-900 focus:text-black-600"
+                className="overflow-hidden rounded h-[50px] w-[100%] bg-neutral-100 text-gray-900 focus:text-black-600"
                 style={override}
                 onChange={(e) => {
                   setphone(e.target.value);
@@ -70,12 +91,13 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
           </div>
 
           <textarea
-            placeholder="Your Massage"
+            placeholder="Your Massage *"
             className="!h-[207px] !w-[737px]  bg-neutral-100 rounded-[4px] "
             onChange={(e) => {
               setmsg(e.target.value);
             }}
           ></textarea>
+
           <Link
             href="/dropdown"
             className="text-neutral-50 text-base font-medium leading-6"
@@ -91,6 +113,7 @@ export const Contact = ({ override }: { override?: React.CSSProperties }) => {
             </button>
           </Link>
         </div>
+        <p className=" text-[rgb(219,_68,_68)] font-medium ml-[6%]">{err}</p>
       </div>
       <div className="absolute w-[340px] h-[457px] top-[23px] left-[135px] bg-[color:var(--primary)] rounded-[4px] overflow-hidden shadow-[var(--categogy-5)]">
         <div className="inline-flex flex-col items-start gap-[32px] relative top-[40px] left-[35px]">

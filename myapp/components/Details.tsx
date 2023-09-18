@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { eventEmitter } from "./eventEmitter";
 
 const Details = () => {
   const router = useRouter();
@@ -34,24 +34,37 @@ const Details = () => {
   if (decodedToken !== null) {
     idUser = decodedToken.id;
   }
-  console.log(idUser ,"iduser");
-  
+
   const add = (product: any, qte: any) => {
     const obj = {
-      ...product,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      images: JSON.parse(product.images),
+      colours: JSON.parse(product.colours),
+      size: JSON.parse(product.size),
+      price: product.price,
+      discount: product.discount,
       quantity: qte,
-      userid:idUser
     };
-    console.log(obj ,"jhvguhi");
     axios
-      .post(`http://localhost:5000/cart/createCart`,obj)
+      .post(`http://localhost:5000/cart/createCart/${idUser}`, obj)
       .then((result) => {
+        let value = localStorage.getItem(`sumcart${idUser}`);
+        if (value === null) {
+          localStorage.setItem(`sumcart${idUser}`, "1");
+        } else {
+          value = parseInt(value, 10) + 1;
+          localStorage.setItem(`sumcart${idUser}`, value.toString());
+          eventEmitter.emit(`sumcartchanged`, value);
+        }
         router.push("/cart");
       })
       .catch((error: any) => {
         console.log(error);
       });
   };
+
   return (
     <main>
       <div className="inline-flex gap-5 ml-[25%] mb-9">
@@ -103,14 +116,13 @@ const Details = () => {
                 </button>
               </div>
             </div>
-           
-              <p
-                className="w-40 h-11 bg-red-500 rounded justify-center items-center inline-flex hover:bg-red-300 "
-                onClick={() => add(data, counter)}
-              >
-                Buy Now
-              </p>
-      
+
+            <p
+              className="w-40 h-11 bg-red-500 rounded justify-center items-center inline-flex hover:bg-red-300 "
+              onClick={() => add(data, counter)}
+            >
+              Buy Now
+            </p>
           </div>
 
           <div className="w-96 h-44 justify-center items-center rounded border border-black border-opacity-50">

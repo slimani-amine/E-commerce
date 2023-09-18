@@ -1,6 +1,5 @@
 const express = require("express");
 const route = express.Router();
-// const { db, bussiness } = require('../models/index.js'); 
 const db =require ("../models/index")
 
 

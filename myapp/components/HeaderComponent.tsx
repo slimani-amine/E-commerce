@@ -51,7 +51,7 @@ export const HeaderComponent = ({}: {}) => {
         <SearchComponentSet property_1="Active" />
         <div className="flex items-center gap-4">
           <Wishlist wishlist={idUser === "0" ? "off" : "On"} iduser={idUser}/>
-          <Cart1WithBuy cart={idUser === "0" ? "off" : "On"} iduser={idUser}/>
+          <Cart1WithBuy cart={idUser === "0" ? "Off" : "On"} iduser={idUser}/>
           <User user={idUser === "0" ? "off" : "On"} iduser={idUser} />
         </div>
       </div>

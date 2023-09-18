@@ -1,8 +1,8 @@
+import { eventEmitter } from "./eventEmitter";
 import Link from "next/link";
 import { Cart1 } from "./Cart1";
 import { Badge } from "antd";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export const Cart1WithBuy = ({
   override,
@@ -13,25 +13,45 @@ export const Cart1WithBuy = ({
   cart: string;
   iduser: String;
 }) => {
-
-  const [cartshop, setcartshop] = useState<number | undefined>(undefined);
-
+  const jwt = require("jsonwebtoken");
+  let token = "";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const decodedToken = jwt.decode(token);
+  var idUser = 0;
+  if (decodedToken !== null) {
+    idUser = decodedToken.id;
+  }
+  const [sumcart, setSumcart] = useState<string | null>(null);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/cart/getAllCart/${iduser}`)
-      .then((result) => {
-        setcartshop(result.data.length);
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === `sumcart${idUser}`) {
+        setSumcart(e.newValue);
+      }
+    };
+
+    const handleLocalChange = (value: string) => {
+      setSumcart(value);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    eventEmitter.on("sumcartChanged", handleLocalChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      const currentEvents = eventEmitter.events["sumcartChanged"] || [];
+      eventEmitter.events["sumcartChanged"] = currentEvents.filter(
+        (l) => l !== handleLocalChange
+      );
+    };
   }, []);
 
   switch (cart) {
     case "On":
       return (
         <Link href={`/cart?userid:${iduser}`}>
-          <Badge count={cartshop}>
+          <Badge count={sumcart}>
             <div className="relative w-8 h-8" style={override}>
               <Cart1
                 override={{

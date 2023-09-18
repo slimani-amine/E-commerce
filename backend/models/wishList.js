@@ -18,18 +18,22 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       images: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       colours: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-      },
+      },   
       size: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
       price: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      discount: {
         type: DataTypes.STRING,
         allowNull: false,
       },
