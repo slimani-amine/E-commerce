@@ -2,12 +2,25 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { eventEmitter } from "./eventEmitter";
+import Link from "next/link";
+import { QuickView6 } from "../public/QuikView6";
 
 const Details = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const { id } = router.query;
+  const [dataforyou, setDataforyou] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/products/getAllProducts")
+      .then((result) => {
+        setDataforyou(result.data);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }, []);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/products/getOneProducts/${id}`)
@@ -64,7 +77,35 @@ const Details = () => {
         console.log(error);
       });
   };
-
+  const addwish = (product: any) => {
+    const obj = {
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      images: JSON.parse(product.images),
+      colours: JSON.parse(product.colours),
+      size: JSON.parse(product.size),
+      price: product.price,
+      discount: product.discount,
+      userid: idUser,
+    };
+    axios
+      .post(`http://localhost:5000/wishlist/createWishList`, obj)
+      .then((result) => {
+        console.log("added successfully");
+        let value = localStorage.getItem(`sumwish${idUser}`);
+        if (value === null) {
+          localStorage.setItem(`sumwish${idUser}`, "1");
+        } else {
+          value = parseInt(value, 10) + 1;
+          localStorage.setItem(`sumwish${idUser}`, value.toString());
+          eventEmitter.emit("sumwishChanged", value);
+        }
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
   return (
     <main>
       <div className="inline-flex gap-5 ml-[25%] mb-9">
@@ -249,6 +290,65 @@ const Details = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-wrap  gap-[10px] ml-[12%] ">
+        {dataforyou &&
+          dataforyou.slice(0, 4).map((e) => {
+            return (
+              <div className="relative w-[270px] h-[550px] bg-[color:var(--secondary)] rounded-[4px] overflow-hidden">
+                <div className=" w-[246px] h-[183px] ">
+                  <div className="inline-flex flex-col items-start gap-[8px] absolute top-0 left-[212px]">
+                    <Link href={`/details?id=${e.id}`}>
+                      <QuickView6 className="!absolute !w-[24px] !h-[24px] !top-[30px] !left-[35px]" />
+                    </Link>
+                  </div>
+                  <div
+                    className="inline-flex flex-col items-start gap-[8px] absolute top-0 left-[230px] ml-[6%] cursor-pointer"
+                    onClick={() => {
+                      addwish(e);
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 5C5.7912 5 4 6.73964 4 8.88594C4 10.6185 4.7 14.7305 11.5904 18.8873C11.7138 18.961 11.8555 19 12 19C12.1445 19 12.2862 18.961 12.4096 18.8873C19.3 14.7305 20 10.6185 20 8.88594C20 6.73964 18.2088 5 16 5C13.7912 5 12 7.35511 12 7.35511C12 7.35511 10.2088 5 8 5Z"
+                        stroke="black"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div className=" w-[190px] h-[180px] ">
+                    <img
+                      className=" w-[178px] h-[129px] ml-[60px] "
+                      alt="Element"
+                      src={JSON.parse(e.images)[0]}
+                    />
+                  </div>
+                </div>
+                <div
+                  className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px] cursor-pointer	"
+                  onClick={() => {
+                    add(e, 1);
+                  }}
+                >
+                  <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
+                    <div className=" text-white">Add To Cart</div>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-black">{e.name}</p>
+                  <p className="text-red-500">{e.price}</p>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </main>
   );

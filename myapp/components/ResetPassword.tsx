@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { useRouter } from "next/router";
+import { Tostify } from "../public/Tostify";
+import { toast } from "react-toastify";
 const ResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>();
   const [newPassword, setNewPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-
+  const router = useRouter();
   const handleResetPassword = async () => {
     try {
       await axios.post(`http://localhost:5000/reset-password/${token}`, {
         newPassword,
       });
-      setMessage(
-        "Password reset successful. You can now log in with your new password."
-      );
+      toast.success("🚀 Registration successful! Welcome aboard! 🚀");
+      setTimeout(() => {
+        router.push("/logIn");
+      }, 2000);
     } catch (error) {
       setMessage("Password reset failed. Please try again.");
     }
@@ -25,6 +28,7 @@ const ResetPassword: React.FC = () => {
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-[color:var(--bg)] w-[1440px] h-[1000px] relative">
           <div className="inline-flex items-center gap-[129px] absolute top-[50px] left-0">
+            <Tostify/>
             <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
               <img
                 className="absolute w-[805px] h-[706px] top-[75px] left-0"

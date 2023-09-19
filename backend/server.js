@@ -23,18 +23,22 @@ app.use("/products", productsRoutes);
 app.use("/wishList", wishListRoutes);
 app.use("/review", reviewRoutes);
 
+
+
+
+
+
+// forget password 
 // Function to generate a unique token
 function generateUniqueToken() {
   const tokenLength = 32;
   const characters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let token = "";
-
   for (let i = 0; i < tokenLength; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     token += characters.charAt(randomIndex);
   }
-
   return token;
 }
 
@@ -44,39 +48,58 @@ async function saveTokenToUser(email, token) {
 }
 
 async function getUserByToken(token) {
-
   if (token === "validToken") {
     return { id: "userId" };
   }
   return null;
 }
 
-async function updateUserPassword(userId, hashedPassword) {
+async function updateUserPassword(userId, newpassword) {
+  route.put("/updateUser/:id", async (req, res) => {
+    try {
+      const user = await User.findOne({ where: { id: userId } });
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+      let updatedFields = {
+        address:user.address,
+        firstName:user.firstName,
+        lasstName:user.lasstName,
+        email:user.email,
+        password:newpassword,
+      };
+  
+      const result = await User.update(updatedFields, {
+        where: { id: userId },
+      });
+  
+      if (result[0] === 1) {
+        res.status(200).json({ message: "User updated successfully." });
+      } else {
+        res.status(404).json({ message: "User not found." });
+      }
+    } catch (error) {
+      console.error("Error detail:", error.message);
+      res.status(500).json({ message: "Error updating user." });
+    }
+  });
 
-  console.log(`Password updated for user with ID: ${userId}`);
-}
-
-async function invalidateToken(token) {
-
-  console.log(`Token invalidated: ${token}`);
 }
 
 app.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
-
   const token = generateUniqueToken();
   await saveTokenToUser(email, token);
-
   const resetLink = `http://localhost:3000/resetpassword/${token}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "slimaniamin76@gmail.com",
-      pass: "a.m.i.n.e",
+      user: "slimanimedamine24@gmail.com",
+      pass: "A.m.i.n.e1",
     },
   });
   const mailOptions = {
-    from: "slimaniamin76@gmail.com",
+    from: "slimanimedamine24@gmail.com",
     to: email,
     subject: "Password Reset",
     text: `Click the following link to reset your password: ${resetLink}`,
@@ -93,6 +116,8 @@ app.post("/forgot-password", async (req, res) => {
   });
 });
 
+
+
 app.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
@@ -102,16 +127,13 @@ app.post("/reset-password/:token", async (req, res) => {
   if (!user || tokenIsExpired(token)) {
     return res.status(400).json({ error: "Invalid or expired token" });
   }
-
-  // Hash the new password and update the user's password in the database
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
-  await updateUserPassword(user.id, hashedPassword);
-
-  // Invalidate the token
-  await invalidateToken(token);
+  await updateUserPassword(user.id, newPassword);
 
   res.status(200).json({ message: "Password reset successful" });
 });
+
+
+
 
 // Start the Express server
 const PORT = process.env.PORT || 5000;

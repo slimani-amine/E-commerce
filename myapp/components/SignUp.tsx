@@ -22,6 +22,10 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
       password: password,
       email: email,
     };
+    if (!firstName || !lastName || !password || !email) {
+      setError("All fields are required");
+      return;
+    }
     axios
       .post("http://localhost:5000/user/register", newUser)
       .then((response) => {
@@ -45,6 +49,7 @@ export const SignUp = ({ override }: { override?: React.CSSProperties }) => {
         <div className="bg-white flex flex-row justify-center w-full">
           <div className="bg-[color:var(--bg)] w-[1440px] h-[1561px] relative">
             <Line className="!absolute !left-0 !top-[140px]" />
+            <Tostify />
             <div className="inline-flex items-center gap-[129px] absolute top-[100px] left-0">
               <div className="relative w-[805px] h-[781px] bg-[#cbe4e8] rounded-[0px_4px_4px_0px] overflow-hidden">
                 <img
