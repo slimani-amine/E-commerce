@@ -261,16 +261,14 @@ export const Dropdown: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <div className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px] cursor-pointer	">
+                  <div
+                    className=" w-[270px] h-[41px]  bg-black rounded-[0px_0px_4px_4px] cursor-pointer	"
+                    onClick={() => {
+                      add(e, 1);
+                    }}
+                  >
                     <div className="inline-flex items-center gap-[8px] relative top-[8px] left-[84px]">
-                      <div
-                        className=" text-white"
-                        onClick={() => {
-                          add(e, 1);
-                        }}
-                      >
-                        Add To Cart
-                      </div>
+                      <div className=" text-white">Add To Cart</div>
                     </div>
                   </div>
                   <div>
